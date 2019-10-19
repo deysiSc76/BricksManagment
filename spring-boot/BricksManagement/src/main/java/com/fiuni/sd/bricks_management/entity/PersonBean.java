@@ -13,7 +13,6 @@ public class PersonBean implements Serializable{
 	String comment;
 	String email;
 	String password;
-	PersonalDebtBean personal_debt;
 	List<RolBean> roles;
 	List<WorkBean> works;
 	List<WorkBean> client_works;
@@ -64,12 +63,6 @@ public class PersonBean implements Serializable{
 	}
 	public void setRoles(List<RolBean> roles) {
 		this.roles = roles;
-	}
-	public PersonalDebtBean getPersonalDebts() {
-		return personal_debt;
-	}
-	public void setPersonalDebts(PersonalDebtBean personal_debt) {
-		this.personal_debt = personal_debt;
 	}
 	public List<WorkBean> getWorks() {
 		return works;

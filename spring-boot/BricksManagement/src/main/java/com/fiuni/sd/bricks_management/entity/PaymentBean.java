@@ -14,7 +14,6 @@ public class PaymentBean implements Serializable{
 	String date;
 	String document_type;
 	WorkBean work;
-	PersonalDebtBean debt;
 	ProviderBean provider;
 	List<PaymentDetailBean> payment_details;
 	PaymentDetailBean payment_detail;
@@ -64,12 +63,6 @@ public class PaymentBean implements Serializable{
 	}
 	public void setWork(WorkBean work) {
 		this.work = work;
-	}
-	public PersonalDebtBean getDebt() {
-		return debt;
-	}
-	public void setDebt(PersonalDebtBean debt) {
-		this.debt = debt;
 	}
 	public ProviderBean getProvider() {
 		return provider;

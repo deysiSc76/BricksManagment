@@ -2,6 +2,7 @@ package com.fiuni.sd.bricks_management.domain;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
@@ -48,9 +48,6 @@ public class WorkDomain implements BaseDomain {
 	
 	@ManyToOne
 	private PersonDomain client;
-	
-	@OneToOne
-	private BudgetDomain budget;
 	
 	@OneToMany(mappedBy = "work")
 	private List<PaymentDomain> payments = new ArrayList<>();
@@ -121,14 +118,6 @@ public class WorkDomain implements BaseDomain {
 		this.client = client;
 	}
 
-	public BudgetDomain getBudget() {
-		return budget;
-	}
-
-	public void setBudget(BudgetDomain budget) {
-		this.budget = budget;
-	}
-
 	public List<PaymentDomain> getPayments() {
 		return payments;
 	}
@@ -143,7 +132,7 @@ public class WorkDomain implements BaseDomain {
 	public String toString() {
 		return "WorkDomain [id=" + id + ", name=" + name + ", description=" + description + ", address=" + address
 				+ ", startDate=" + start_date + ", endDate=" + end_date + ", personManager=" + personal_manager + ", client="
-				+ client + ", budget=" + budget + ", payments=" + payments + "]";
+				+ client + ", payments=" + payments + "]";
 	}
 	
 	// ***********************************************************************************************************

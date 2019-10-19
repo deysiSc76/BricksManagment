@@ -2,6 +2,7 @@ package com.fiuni.sd.bricks_management.domain;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 
@@ -15,7 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
@@ -57,9 +57,6 @@ public class PersonDomain implements BaseDomain{
 	@JoinTable(name = "people_works", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "work_id"))
 	private List<WorkDomain> people_works = new ArrayList<>();
 
-	@OneToOne
-	private PersonalDebtDomain personal_debt;
-	
 	@OneToMany(mappedBy = "client")
 	private List<WorkDomain> client_works = new ArrayList<>();
 	
@@ -131,14 +128,6 @@ public class PersonDomain implements BaseDomain{
 	public void setRoles(List<RoleDomain> roles) {
 		this.roles = roles;
 	}
-	
-	public PersonalDebtDomain getPersonal_debt() {
-		return personal_debt;
-	}
-
-	public void setPersonal_debt(PersonalDebtDomain personal_debt) {
-		this.personal_debt = personal_debt;
-	}
 
 	public List<ChargeDomain> getClient_charges() {
 		return client_charges;
@@ -162,7 +151,7 @@ public class PersonDomain implements BaseDomain{
 	public String toString() {
 		return "PersonDomain [id=" + id + ", name=" + name + ", number=" + number + ", address=" + address
 				+ ", comment=" + comment + ", email=" + email + ", password=" + password + ", roles=" + roles
-				+ ", personal_debt=" + personal_debt + ", people_works=" + people_works + ", client_charges="
+				+ ", people_works=" + people_works + ", client_charges="
 				+ client_charges + "]";
 	}
 
