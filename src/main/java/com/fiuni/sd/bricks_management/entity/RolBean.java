@@ -8,7 +8,7 @@ public class RolBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	String type;
-	List<PersonBean> persons;
+	List<UserBean> users;
 	
 	// ***********************************************************************
 	
@@ -20,11 +20,11 @@ public class RolBean implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
-	public List<PersonBean> getPersons() {
-		return persons;
+	public List<UserBean> getUsers() {
+		return users;
 	}
-	public void setPersons(List<PersonBean> persons) {
-		this.persons = persons;
+	public void setUsers(List<UserBean> users) {
+		this.users = users;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

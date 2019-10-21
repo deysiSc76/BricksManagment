@@ -34,7 +34,7 @@ public class ChargeDomain implements BaseDomain {
 	private BudgetDomain budget;
 	
 	@ManyToOne
-	private PersonDomain client;
+	private UserDomain client;
 	
 	// *****************************************************************************************************************
 
@@ -78,11 +78,11 @@ public class ChargeDomain implements BaseDomain {
 		this.budget = budget;
 	}
 
-	public PersonDomain getClient() {
+	public UserDomain getClient() {
 		return client;
 	}
 
-	public void setClient(PersonDomain client) {
+	public void setClient(UserDomain client) {
 		this.client = client;
 	}
 	

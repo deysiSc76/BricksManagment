@@ -31,7 +31,7 @@ public class PersonalDebtDomain implements BaseDomain {
 	private PaymentDomain payment;
 	
 	@OneToOne
-	private PersonDomain person;
+	private UserDomain user;
 
 	// *****************************************************************************************************************
 
@@ -67,12 +67,12 @@ public class PersonalDebtDomain implements BaseDomain {
 		this.payment = payment;
 	}
 
-	public PersonDomain getPerson() {
-		return person;
+	public UserDomain getUser() {
+		return user;
 	}
 
-	public void setPerson(PersonDomain person) {
-		this.person = person;
+	public void setUser(UserDomain user) {
+		this.user = user;
 	}
 
 	// *****************************************************************************************************************
@@ -80,7 +80,7 @@ public class PersonalDebtDomain implements BaseDomain {
 	@Override
 	public String toString() {
 		return "PersonalDebtDomain [id=" + id + ", amount=" + amount + ", description=" + description + ", payment="
-				+ payment + ", person=" + person + "]";
+				+ payment + ", user=" + user + "]";
 	}
 	
 	// *****************************************************************************************************************

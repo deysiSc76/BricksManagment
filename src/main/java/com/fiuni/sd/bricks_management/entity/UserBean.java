@@ -3,7 +3,7 @@ package com.fiuni.sd.bricks_management.entity;
 import java.io.Serializable;
 import java.util.List;
 
-public class PersonBean implements Serializable{
+public class UserBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	

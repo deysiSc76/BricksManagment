@@ -9,7 +9,7 @@ public class PersonalDebtBean implements Serializable{
 	int amount;
 	String description;
 	PaymentBean payment;
-	PersonBean person;
+	UserBean user;
 	
 	// ***********************************************************************
 	
@@ -33,11 +33,11 @@ public class PersonalDebtBean implements Serializable{
 	public void setPayment(PaymentBean payment) {
 		this.payment = payment;
 	}
-	public PersonBean getPerson() {
-		return person;
+	public UserBean getUser() {
+		return user;
 	}
-	public void setPerson(PersonBean person) {
-		this.person = person;
+	public void setUser(UserBean user) {
+		this.user = user;
 	}
 	
 	// ***********************************************************************

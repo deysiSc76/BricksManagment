@@ -13,8 +13,8 @@ public class WorkBean implements Serializable{
 	String startDate;
 	String end_date;
 	String personal_manager;
-	PersonBean client;
-	List<PersonBean> managers;
+	UserBean client;
+	List<UserBean> managers;
 	List<PaymentBean> payments;
 	
 	// ***********************************************************************
@@ -57,16 +57,16 @@ public class WorkBean implements Serializable{
 	public void setPersonalManager(String personal_manager) {
 		this.personal_manager = personal_manager;
 	}
-	public PersonBean getClient() {
+	public UserBean getClient() {
 		return client;
 	}
-	public void setClient(PersonBean client) {
+	public void setClient(UserBean client) {
 		this.client = client;
 	}
-	public List<PersonBean> getManagers() {
+	public List<UserBean> getManagers() {
 		return managers;
 	}
-	public void setManagers(List<PersonBean> managers) {
+	public void setManagers(List<UserBean> managers) {
 		this.managers = managers;
 	}
 	public List<PaymentBean> getPayments() {

@@ -21,8 +21,8 @@ import javax.persistence.Table;
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
 
 @Entity
-@Table(name = "people")
-public class PersonDomain implements BaseDomain{
+@Table(name = "user")
+public class UserDomain implements BaseDomain{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -50,12 +50,12 @@ public class PersonDomain implements BaseDomain{
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "people_roles", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<RoleDomain> roles = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "people_works", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "work_id"))
-	private List<WorkDomain> people_works = new ArrayList<>();
+	@JoinTable(name = "user_works", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "work_id"))
+	private List<WorkDomain> user_works = new ArrayList<>();
 
 	@OneToMany(mappedBy = "client")
 	private List<WorkDomain> client_works = new ArrayList<>();
@@ -137,12 +137,12 @@ public class PersonDomain implements BaseDomain{
 		this.client_charges = client_charges;
 	}
 
-	public List<WorkDomain> getPeople_works() {
-		return people_works;
+	public List<WorkDomain> getUserWorks() {
+		return user_works;
 	}
 
-	public void setPeople_works(List<WorkDomain> people_works) {
-		this.people_works = people_works;
+	public void setUserWorks(List<WorkDomain> user_works) {
+		this.user_works = user_works;
 	}
 
 	// *****************************************************************************************************************
@@ -151,7 +151,7 @@ public class PersonDomain implements BaseDomain{
 	public String toString() {
 		return "PersonDomain [id=" + id + ", name=" + name + ", number=" + number + ", address=" + address
 				+ ", comment=" + comment + ", email=" + email + ", password=" + password + ", roles=" + roles
-				+ ", people_works=" + people_works + ", client_charges="
+				+ ", user_works=" + user_works + ", client_charges="
 				+ client_charges + "]";
 	}
 

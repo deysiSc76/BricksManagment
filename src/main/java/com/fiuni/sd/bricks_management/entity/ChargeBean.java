@@ -10,7 +10,7 @@ public class ChargeBean implements Serializable {
 	int amount;
 	String date;
 	BudgetBean budget;
-	PersonBean cliente;
+	UserBean cliente;
 	
 	// ***********************************************************************
 	
@@ -40,10 +40,10 @@ public class ChargeBean implements Serializable {
 	public void setBudget(BudgetBean budget) {
 		this.budget = budget;
 	}
-	public PersonBean getCliente() {
+	public UserBean getCliente() {
 		return cliente;
 	}
-	public void setCliente(PersonBean cliente) {
+	public void setCliente(UserBean cliente) {
 		this.cliente = cliente;
 	}
 	

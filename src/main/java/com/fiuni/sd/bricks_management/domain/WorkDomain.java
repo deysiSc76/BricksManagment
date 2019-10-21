@@ -47,7 +47,7 @@ public class WorkDomain implements BaseDomain {
 	private String personal_manager;
 	
 	@ManyToOne
-	private PersonDomain client;
+	private UserDomain client;
 	
 	@OneToMany(mappedBy = "work")
 	private List<PaymentDomain> payments = new ArrayList<>();
@@ -110,11 +110,11 @@ public class WorkDomain implements BaseDomain {
 		this.personal_manager = personal_manager;
 	}
 
-	public PersonDomain getClient() {
+	public UserDomain getClient() {
 		return client;
 	}
 
-	public void setClient(PersonDomain client) {
+	public void setClient(UserDomain client) {
 		this.client = client;
 	}
 

@@ -2,7 +2,7 @@ package com.fiuni.sd.bricks_management.dto;
 
 import java.io.Serializable;
 
-public class PersonDTO implements Serializable{
+public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	String name;
 	int number;
