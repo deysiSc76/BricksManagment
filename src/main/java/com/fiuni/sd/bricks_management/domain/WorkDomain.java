@@ -1,17 +1,18 @@
 package com.fiuni.sd.bricks_management.domain;
 
-import java.util.ArrayList;
-
-
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
@@ -46,12 +47,16 @@ public class WorkDomain implements BaseDomain {
 	@Column(name = "personal_manager")
 	private String personal_manager;
 	
-	@ManyToOne
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "budget_id")
+	private BudgetDomain budget;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
 	private PersonDomain client;
 	
 	@OneToMany(mappedBy = "work")
-	private List<PaymentDomain> payments = new ArrayList<>();
-
+	private Set<PaymentDomain> payments = new HashSet<>();
 	// ***********************************************************************************************************
 	
 	public Integer getId() {
@@ -118,11 +123,19 @@ public class WorkDomain implements BaseDomain {
 		this.client = client;
 	}
 
-	public List<PaymentDomain> getPayments() {
+	public BudgetDomain getBudget() {
+		return budget;
+	}
+	
+	public void setBudget(BudgetDomain budget) {
+		this.budget = budget;
+	}
+	
+	public Set<PaymentDomain> getPayments() {
 		return payments;
 	}
 
-	public void setPayments(List<PaymentDomain> payments) {
+	public void setPayments(Set<PaymentDomain> payments) {
 		this.payments = payments;
 	}
 
@@ -131,8 +144,8 @@ public class WorkDomain implements BaseDomain {
 	@Override
 	public String toString() {
 		return "WorkDomain [id=" + id + ", name=" + name + ", description=" + description + ", address=" + address
-				+ ", startDate=" + start_date + ", endDate=" + end_date + ", personManager=" + personal_manager + ", client="
-				+ client + ", payments=" + payments + "]";
+				+ ", start_date=" + start_date + ", end_date=" + end_date + ", personal_manager=" + personal_manager
+				+ ", budget=" + budget + ", client=" + client + ", payments=" + payments + "]";
 	}
 	
 	// ***********************************************************************************************************

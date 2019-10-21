@@ -1,14 +1,15 @@
 package com.fiuni.sd.bricks_management.domain;
 
-import java.util.ArrayList;
-
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,14 +39,16 @@ public class PaymentConceptDomain implements BaseDomain {
 	@Column(name = "material")
 	private boolean material;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "provider_id")
 	private ProviderDomain provider;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "budget_concept_id")
 	private BudgetConceptDomain budget_concept;
 	
 	@OneToMany(mappedBy = "payment_concept")
-	private List<PaymentDetailDomain> payment_details = new ArrayList<>();
+	private Set<PaymentDetailDomain> payment_details = new HashSet<>();
 	
 	// *****************************************************************************************************************
 	
@@ -97,11 +100,11 @@ public class PaymentConceptDomain implements BaseDomain {
 		this.provider = provider;
 	}
 
-	public List<PaymentDetailDomain> get_paymentDetails() {
+	public Set<PaymentDetailDomain> get_paymentDetails() {
 		return payment_details;
 	}
 
-	public void set_paymentDetails(List<PaymentDetailDomain> payment_details) {
+	public void set_paymentDetails(Set<PaymentDetailDomain> payment_details) {
 		this.payment_details = payment_details;
 	}
 	

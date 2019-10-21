@@ -1,10 +1,7 @@
 package com.fiuni.sd.bricks_management.domain;
 
-import java.util.ArrayList;
-
-
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
@@ -49,19 +47,23 @@ public class PersonDomain implements BaseDomain{
 	@Column(name = "password") 
 	private String password;
 	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pesonal_debt_id")
+	private PersonalDebtDomain personal_debt;
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "people_roles", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<RoleDomain> roles = new ArrayList<>();
+	private Set<RoleDomain> roles = new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "people_works", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "work_id"))
-	private List<WorkDomain> people_works = new ArrayList<>();
+	private Set<WorkDomain> people_works = new HashSet<>();
 
 	@OneToMany(mappedBy = "client")
-	private List<WorkDomain> client_works = new ArrayList<>();
+	private Set<WorkDomain> client_works = new HashSet<>();
 	
 	@OneToMany(mappedBy = "client")
-	private List<ChargeDomain> client_charges = new ArrayList<>();
+	private Set<ChargeDomain> client_charges = new HashSet<>();
 	
 	// *****************************************************************************************************************
 	
@@ -121,27 +123,35 @@ public class PersonDomain implements BaseDomain{
 		this.password = password;
 	}
 
-	public List<RoleDomain> getRoles() {
+	public PersonalDebtDomain getPersonalDebt() {
+		return personal_debt;
+	}
+	
+	public void setPersonalDebt(PersonalDebtDomain personal_debt) {
+		this.personal_debt = personal_debt;
+	}
+	
+	public Set<RoleDomain> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<RoleDomain> roles) {
+	public void setRoles(Set<RoleDomain> roles) {
 		this.roles = roles;
 	}
 
-	public List<ChargeDomain> getClient_charges() {
+	public Set<ChargeDomain> getClient_charges() {
 		return client_charges;
 	}
 
-	public void setClient_charges(List<ChargeDomain> client_charges) {
+	public void setClient_charges(Set<ChargeDomain> client_charges) {
 		this.client_charges = client_charges;
 	}
 
-	public List<WorkDomain> getPeople_works() {
+	public Set<WorkDomain> getPeople_works() {
 		return people_works;
 	}
 
-	public void setPeople_works(List<WorkDomain> people_works) {
+	public void setPeople_works(Set<WorkDomain> people_works) {
 		this.people_works = people_works;
 	}
 
@@ -150,12 +160,11 @@ public class PersonDomain implements BaseDomain{
 	@Override
 	public String toString() {
 		return "PersonDomain [id=" + id + ", name=" + name + ", number=" + number + ", address=" + address
-				+ ", comment=" + comment + ", email=" + email + ", password=" + password + ", roles=" + roles
-				+ ", people_works=" + people_works + ", client_charges="
-				+ client_charges + "]";
+				+ ", comment=" + comment + ", email=" + email + ", password=" + password + ", personal_debt="
+				+ personal_debt + ", roles=" + roles + ", people_works=" + people_works + ", client_works="
+				+ client_works + ", client_charges=" + client_charges + "]";
 	}
 
-	
 	// *****************************************************************************************************************
 
 }

@@ -2,6 +2,7 @@ package com.fiuni.sd.bricks_management.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,10 +28,10 @@ public class PersonalDebtDomain implements BaseDomain {
 	@Column(name = "description")
 	private String description;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal_debt")
 	private PaymentDomain payment;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal_debt")
 	private PersonDomain person;
 
 	// *****************************************************************************************************************

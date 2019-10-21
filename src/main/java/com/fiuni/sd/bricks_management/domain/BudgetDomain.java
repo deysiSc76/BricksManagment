@@ -1,11 +1,11 @@
 package com.fiuni.sd.bricks_management.domain;
 
-import java.util.ArrayList;
-
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,14 +30,14 @@ public class BudgetDomain implements BaseDomain {
 	@Column(name = "total_amount")
 	private String total_amount;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "budget")
 	private WorkDomain work;
 	
 	@OneToMany(mappedBy = "budget")
-	private List<BudgetDetailDomain> budget_details = new ArrayList<>();
+	private Set<BudgetDetailDomain> budget_details = new HashSet<>();
 	
 	@OneToMany(mappedBy = "budget")
-	private List<ChargeDomain> charges = new ArrayList<>();
+	private Set<ChargeDomain> charges = new HashSet<>();
 
 	// ***********************************************************************************************************
 	
@@ -65,19 +65,19 @@ public class BudgetDomain implements BaseDomain {
 		this.work = work;
 	}
 
-	public List<BudgetDetailDomain> getBudgetDetails() {
+	public Set<BudgetDetailDomain> getBudgetDetails() {
 		return budget_details;
 	}
 
-	public void setBudgetDetails(List<BudgetDetailDomain> budget_details) {
+	public void setBudgetDetails(Set<BudgetDetailDomain> budget_details) {
 		this.budget_details = budget_details;
 	}
 
-	public List<ChargeDomain> getCharges() {
+	public Set<ChargeDomain> getCharges() {
 		return charges;
 	}
 
-	public void setCharges(List<ChargeDomain> charges) {
+	public void setCharges(Set<ChargeDomain> charges) {
 		this.charges = charges;
 	}
 

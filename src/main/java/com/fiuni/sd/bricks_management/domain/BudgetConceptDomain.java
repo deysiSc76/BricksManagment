@@ -1,8 +1,7 @@
 package com.fiuni.sd.bricks_management.domain;
 
-import java.util.ArrayList;
-
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,10 +29,10 @@ public class BudgetConceptDomain implements BaseDomain {
 	private String description;
 	
 	@OneToMany(mappedBy = "budget_concept")
-	private List<BudgetDetailDomain> budget_details = new ArrayList<>();
+	private Set<BudgetDetailDomain> budget_details = new HashSet<>();
 
 	@OneToMany(mappedBy = "budget_concept")
-	private List<PaymentConceptDomain> payment_concepts = new ArrayList<>();
+	private Set<PaymentConceptDomain> payment_concepts = new HashSet<>();
 
 	// *****************************************************************************************************************
 	
@@ -53,19 +52,19 @@ public class BudgetConceptDomain implements BaseDomain {
 		this.description = description;
 	}
 
-	public List<BudgetDetailDomain> getBudgetDetails() {
+	public Set<BudgetDetailDomain> getBudgetDetails() {
 		return budget_details;
 	}
 
-	public void setBudgetDetails(List<BudgetDetailDomain> budget_details) {
+	public void setBudgetDetails(Set<BudgetDetailDomain> budget_details) {
 		this.budget_details = budget_details;
 	}
 
-	public List<PaymentConceptDomain> getPaymentConcepts() {
+	public Set<PaymentConceptDomain> getPaymentConcepts() {
 		return payment_concepts;
 	}
 
-	public void setPaymentConcepts(List<PaymentConceptDomain> payment_concepts) {
+	public void setPaymentConcepts(Set<PaymentConceptDomain> payment_concepts) {
 		this.payment_concepts = payment_concepts;
 	}
 

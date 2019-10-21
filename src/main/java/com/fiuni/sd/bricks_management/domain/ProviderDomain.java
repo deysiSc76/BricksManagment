@@ -1,7 +1,7 @@
 package com.fiuni.sd.bricks_management.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,10 +37,10 @@ public class ProviderDomain implements BaseDomain {
 	private String ruc;
 	
 	@OneToMany(mappedBy = "provider")
-	private List<PaymentConceptDomain> payment_concepts = new ArrayList<>();
+	private Set<PaymentConceptDomain> payment_concepts = new HashSet<>();
 
 	@OneToMany(mappedBy = "provider")
-	private List<PaymentDomain> payments = new ArrayList<>();
+	private Set<PaymentDomain> payments = new HashSet<>();
 	
 	public Integer getId() {
 		return id;
@@ -82,19 +82,19 @@ public class ProviderDomain implements BaseDomain {
 		this.ruc = ruc;
 	}
 
-	public List<PaymentConceptDomain> getPaymentConcepts() {
+	public Set<PaymentConceptDomain> getPaymentConcepts() {
 		return payment_concepts;
 	}
 
-	public void setPaymentConcepts(List<PaymentConceptDomain> payment_concepts) {
+	public void setPaymentConcepts(Set<PaymentConceptDomain> payment_concepts) {
 		this.payment_concepts = payment_concepts;
 	}
 
-	public List<PaymentDomain> getPayments() {
+	public Set<PaymentDomain> getPayments() {
 		return payments;
 	}
 
-	public void setPayments(List<PaymentDomain> payments) {
+	public void setPayments(Set<PaymentDomain> payments) {
 		this.payments = payments;
 	}
 
