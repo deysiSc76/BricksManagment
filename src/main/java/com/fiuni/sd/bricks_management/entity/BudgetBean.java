@@ -7,19 +7,19 @@ public class BudgetBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	String total_amount;
-	WorkBean work;
-	List<BudgetDetailBean> budget_details;
-	List<ChargeBean> charges;
+	private int total_amount;
+	private WorkBean work;
+	private List<BudgetDetailBean> budget_details;
+	private List<ChargeBean> charges;
 	
 	// ***********************************************************************
 	
 	// GETTERS & SETTERS
 	
-	public String getTotal_amount() {
+	public int getTotal_amount() {
 		return total_amount;
 	}
-	public void setTotal_amount(String total_amount) {
+	public void setTotal_amount(int total_amount) {
 		this.total_amount = total_amount;
 	}
 	public WorkBean getWork() {

@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ProviderBean implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-	String business_name;
-	int number;
-	String address;
-	String ruc;
-	List<PaymentBean> payments;
-	List<PaymentConceptBean> payment_concepts;
+	
+	private String business_name;
+	private int number;
+	private String address;
+	private String ruc;
+	private List<PaymentBean> payments;
+	private List<PaymentConceptBean> payment_concepts;
 	
 	// ***********************************************************************
 	

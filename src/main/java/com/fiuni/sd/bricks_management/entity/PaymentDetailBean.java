@@ -7,12 +7,12 @@ public class PaymentDetailBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	int unitPrice;
-	int quantity;
-	PaymentBean payment_conceptP;
-	PaymentBean header;
-	PaymentConceptBean payment_concept;
-	List<PaymentBean> payments;
+	private int unitPrice;
+	private int quantity;
+	private PaymentBean payment_conceptP;
+	private PaymentBean header;
+	private PaymentConceptBean payment_concept;
+	private List<PaymentBean> payments;
 	
 	// ***********************************************************************
 	

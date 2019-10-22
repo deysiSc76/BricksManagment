@@ -1,10 +1,16 @@
 package com.fiuni.sd.bricks_management.dto;
 
-public class ProviderDTO {
-	String businessName;
-	int number;
-	String address;
-	String ruc;
+import java.io.Serializable;
+
+public class ProviderDTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	private String businessName;
+	private int number;
+	private String address;
+	private String ruc;
+	
 	public String getBusinessName() {
 		return businessName;
 	}

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class RolDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
-	String type;
+	private String type;
 	public String getType() {
 		return type;
 	}

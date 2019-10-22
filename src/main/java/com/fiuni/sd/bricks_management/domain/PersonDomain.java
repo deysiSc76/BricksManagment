@@ -1,7 +1,7 @@
 package com.fiuni.sd.bricks_management.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList; 
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,17 +53,17 @@ public class PersonDomain implements BaseDomain{
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "people_roles", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<RoleDomain> roles = new HashSet<>();
+	private List<RoleDomain> roles = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "people_works", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "work_id"))
-	private Set<WorkDomain> people_works = new HashSet<>();
+	private List<WorkDomain> people_works = new ArrayList<>();
 
 	@OneToMany(mappedBy = "client")
-	private Set<WorkDomain> client_works = new HashSet<>();
+	private List<WorkDomain> client_works = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "client")
-	private Set<ChargeDomain> client_charges = new HashSet<>();
+	private List<ChargeDomain> client_charges = new ArrayList<>();
 	
 	// *****************************************************************************************************************
 	
@@ -131,27 +131,27 @@ public class PersonDomain implements BaseDomain{
 		this.personal_debt = personal_debt;
 	}
 	
-	public Set<RoleDomain> getRoles() {
+	public List<RoleDomain> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<RoleDomain> roles) {
+	public void setRoles(List<RoleDomain> roles) {
 		this.roles = roles;
 	}
 
-	public Set<ChargeDomain> getClient_charges() {
+	public List<ChargeDomain> getClient_charges() {
 		return client_charges;
 	}
 
-	public void setClient_charges(Set<ChargeDomain> client_charges) {
+	public void setClient_charges(List<ChargeDomain> client_charges) {
 		this.client_charges = client_charges;
 	}
 
-	public Set<WorkDomain> getPeople_works() {
+	public List<WorkDomain> getPeople_works() {
 		return people_works;
 	}
 
-	public void setPeople_works(Set<WorkDomain> people_works) {
+	public void setPeople_works(List<WorkDomain> people_works) {
 		this.people_works = people_works;
 	}
 

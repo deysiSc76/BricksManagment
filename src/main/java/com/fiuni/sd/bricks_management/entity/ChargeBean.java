@@ -6,11 +6,11 @@ public class ChargeBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	String description;
-	int amount;
-	String date;
-	BudgetBean budget;
-	PersonBean cliente;
+	private String description;
+	private int amount;
+	private String date;
+	private BudgetBean budget;
+	private PersonBean cliente;
 	
 	// ***********************************************************************
 	

@@ -6,10 +6,10 @@ public class PersonalDebtBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	int amount;
-	String description;
-	PaymentBean payment;
-	PersonBean person;
+	private int amount;
+	private String description;
+	private PaymentBean payment;
+	private PersonBean person;
 	
 	// ***********************************************************************
 	

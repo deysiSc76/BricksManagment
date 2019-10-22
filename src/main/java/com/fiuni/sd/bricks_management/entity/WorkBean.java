@@ -7,16 +7,16 @@ public class WorkBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	String name;
-	String description;
-	String address;
-	String startDate;
-	String end_date;
-	String personal_manager;
-	PersonBean client;
-	BudgetBean budget;
-	List<PersonBean> managers;
-	List<PaymentBean> payments;
+	private String name;
+	private String description;
+	private String address;
+	private String startDate;
+	private String end_date;
+	private String personal_manager;
+	private PersonBean client;
+	private BudgetBean budget;
+	private List<PersonBean> managers;
+	private List<PaymentBean> payments;
 	
 	// ***********************************************************************
 	

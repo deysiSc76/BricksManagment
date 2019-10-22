@@ -5,12 +5,13 @@ import java.io.Serializable;
 
 public class PaymentConceptDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	int budgetConceptId;
-	int providerId;
-	String name;
-	int cost;
-	String description;
-	boolean material;
+
+	private String name;
+	private int cost;
+	private String description;
+	private boolean material;
+	private int budgetConceptId;
+	private int providerId;
 	
 	public int getBudgetConceptId() {
 		return budgetConceptId;

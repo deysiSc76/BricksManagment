@@ -7,17 +7,17 @@ public class PaymentBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	 
-	int total;
-	int number;
-	int stamping;
-	int bill_type;
-	String date;
-	String document_type;
-	WorkBean work;
-	ProviderBean provider;
-	PersonalDebtBean personal_debt;
-	List<PaymentDetailBean> payment_details;
-	PaymentDetailBean payment_detail;
+	private int total;
+	private int number;
+	private int stamping;
+	private int bill_type;
+	private String date;
+	private String document_type;
+	private WorkBean work;
+	private ProviderBean provider;
+	private PersonalDebtBean personal_debt;
+	private List<PaymentDetailBean> payment_details;
+	private PaymentDetailBean payment_detail;
 	
 	// ***********************************************************************
 	

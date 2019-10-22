@@ -1,7 +1,7 @@
 package com.fiuni.sd.bricks_management.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList; 
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,7 +60,7 @@ public class PaymentDomain implements BaseDomain {
 	private PersonalDebtDomain personal_debt;
 	
 	@OneToMany(mappedBy = "payment")
-	private Set<PaymentDetailDomain> payment_details = new HashSet<>();
+	private List<PaymentDetailDomain> payment_details = new ArrayList<>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "payment_detail_id")
@@ -148,11 +148,11 @@ public class PaymentDomain implements BaseDomain {
 		this.personal_debt = personal_debt;
 	}
 
-	public Set<PaymentDetailDomain> getPayment_details() {
+	public List<PaymentDetailDomain> getPayment_details() {
 		return payment_details;
 	}
 
-	public void setPayment_details(Set<PaymentDetailDomain> payment_details) {
+	public void setPayment_details(List<PaymentDetailDomain> payment_details) {
 		this.payment_details = payment_details;
 	}
 

@@ -3,12 +3,23 @@ package com.fiuni.sd.bricks_management.dto;
 import java.io.Serializable;
 
 public class PersonDTO implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-	String name;
-	int number;
-	String address;
-	String comentario;
-	String rol;
+	
+	private String name;
+	private int number;
+	private String address;
+	private String comentario;
+	private String email;
+	private Integer rol_id;
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getName() {
 		return name;
 	}
@@ -33,11 +44,11 @@ public class PersonDTO implements Serializable{
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	public String getRol() {
-		return rol;
+	public Integer getRol() {
+		return rol_id;
 	}
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setRol(Integer rol_id) {
+		this.rol_id = rol_id;
 	}
 	
 	
