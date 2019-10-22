@@ -9,11 +9,11 @@ public abstract class BaseResult<DTO extends BaseDTO> implements Serializable {
 	
 	private List<DTO> dtos;
 
-	public List<DTO> getDtos() {
+	public List<DTO> getList() {
 		return dtos;
 	}
 
-	public void setDtos(List<DTO> dtos) {
+	public void setList(List<DTO> dtos) {
 		this.dtos = dtos;
 	}
 	
