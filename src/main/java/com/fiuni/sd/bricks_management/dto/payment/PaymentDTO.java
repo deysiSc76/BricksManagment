@@ -3,16 +3,20 @@ package com.fiuni.sd.bricks_management.dto.payment;
 import java.io.Serializable;
 
 public class PaymentDTO implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-	int workId;
-	int debtId;
-	int providerId;
-	int total;
-	String date;
-	String documentType;
-	int number;
-	int stamping;
-	int billType;
+	
+	private int workId;
+	private int debtId;
+	private int providerId;
+	private int total;
+	private String date;
+	private String documentType;
+	private int number;
+	private int stamping;
+	private int billType;
+	private int payment_detail_id;
+	
 	public int getWorkId() {
 		return workId;
 	}
@@ -68,6 +72,11 @@ public class PaymentDTO implements Serializable{
 	public void setBillType(int billType) {
 		this.billType = billType;
 	}
+	public int getPayment_detail_id() {
+		return payment_detail_id;
+	}
+	public void setPayment_detail_id(int payment_detail_id) {
+		this.payment_detail_id = payment_detail_id;
+	}
 	
-
 }

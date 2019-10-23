@@ -2,6 +2,7 @@ package com.fiuni.sd.bricks_management.domain.personalDebt;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,23 +18,23 @@ import com.fiuni.sd.bricks_management.domain.user.UserDomain;
 public class PersonalDebtDomain implements BaseDomain {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer id;
-	
+
 	@Column(name = "amount")
 	private int amount;
-	
+
 	@Column(name = "description")
 	private String description;
-	
-	@OneToOne
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal_debt")
 	private PaymentDomain payment;
-	
-	@OneToOne
-	private UserDomain user;
+
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal_debt")
+	private PersonDomain person;
 
 	// *****************************************************************************************************************
 
@@ -84,7 +85,7 @@ public class PersonalDebtDomain implements BaseDomain {
 		return "PersonalDebtDomain [id=" + id + ", amount=" + amount + ", description=" + description + ", payment="
 				+ payment + ", user=" + user + "]";
 	}
-	
+
 	// *****************************************************************************************************************
 
 }

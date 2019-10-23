@@ -1,13 +1,15 @@
 package com.fiuni.sd.bricks_management.domain.paymentDetail;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,13 +35,16 @@ public class PaymentDetailDomain implements BaseDomain {
 	@Column(name = "quantity")
 	private int quantity;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "payment_conceptP_id")
   	private PaymentDomain payment_conceptP;
   	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "payment_id")
   	private PaymentDomain payment; 
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "payment_concept_id")
 	private PaymentConceptDomain payment_concept;
 	
 	@OneToMany(mappedBy = "payment_detail")
@@ -55,35 +60,11 @@ public class PaymentDetailDomain implements BaseDomain {
 		this.id = id;
 	}
 
-	public PaymentDomain getPaymentConceptP() {
-		return payment_conceptP;
-	}
-
-	public void setPaymentConceptP(PaymentDomain payment_conceptP) {
-		this.payment_conceptP = payment_conceptP;
-	}
-
-	public PaymentDomain getPayment() {
-		return payment;
-	}
-
-	public void setPayment(PaymentDomain payment) {
-		this.payment = payment;
-	}
-
-	public PaymentConceptDomain getPaymentConcept() {
-		return payment_concept;
-	}
-
-	public void setPaymentConcept(PaymentConceptDomain payment_concept) {
-		this.payment_concept = payment_concept;
-	}
-
-	public int getUnitPrice() {
+	public int getUnit_price() {
 		return unit_price;
 	}
 
-	public void setUnitPrice(int unit_price) {
+	public void setUnit_price(int unit_price) {
 		this.unit_price = unit_price;
 	}
 
@@ -95,14 +76,48 @@ public class PaymentDetailDomain implements BaseDomain {
 		this.quantity = quantity;
 	}
 
+	public PaymentDomain getPayment_conceptP() {
+		return payment_conceptP;
+	}
+
+	public void setPayment_conceptP(PaymentDomain payment_conceptP) {
+		this.payment_conceptP = payment_conceptP;
+	}
+
+	public PaymentDomain getPayment() {
+		return payment;
+	}
+
+	public void setPayment(PaymentDomain payment) {
+		this.payment = payment;
+	}
+
+	public PaymentConceptDomain getPayment_concept() {
+		return payment_concept;
+	}
+
+	public void setPayment_concept(PaymentConceptDomain payment_concept) {
+		this.payment_concept = payment_concept;
+	}
+
+	public List<PaymentDomain> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<PaymentDomain> payments) {
+		this.payments = payments;
+	}
+
 	// *****************************************************************************************************************
-	
+
 	@Override
 	public String toString() {
-		return "PaymentDetailDomain [id=" + id + ", paymentConceptP=" + payment_conceptP + ", payment=" + payment
-				+ ", paymentConcept=" + payment_concept + ", unitPrice=" + unit_price + ", quantity=" + quantity + "]";
+		return "PaymentDetailDomain [id=" + id + ", unit_price=" + unit_price + ", quantity=" + quantity
+				+ ", payment_conceptP=" + payment_conceptP + ", payment=" + payment + ", payment_concept="
+				+ payment_concept + ", payments=" + payments + "]";
 	}
 	
 	// *****************************************************************************************************************
+	
 	
 }

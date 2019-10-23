@@ -3,19 +3,19 @@ package com.fiuni.sd.bricks_management.entity;
 import java.io.Serializable;
 
 public class ChargeBean implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	String description;
-	int amount;
-	String date;
-	BudgetBean budget;
-	UserBean cliente;
-	
+
+	private String description;
+	private int amount;
+	private String date;
+	private BudgetBean budget;
+	private PersonBean cliente;
+
 	// ***********************************************************************
-	
+
 	// GETTERS & SETTERS
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -46,7 +46,7 @@ public class ChargeBean implements Serializable {
 	public void setCliente(UserBean cliente) {
 		this.cliente = cliente;
 	}
-	
+
 	// ***********************************************************************
 
 }

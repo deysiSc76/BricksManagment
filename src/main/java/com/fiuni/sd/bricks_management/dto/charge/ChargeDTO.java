@@ -3,12 +3,15 @@ package com.fiuni.sd.bricks_management.dto.charge;
 import java.io.Serializable;
 
 public class ChargeDTO implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-	String description;
-	int amount;
-	String date;
-	int budgetId;
-	int clienteId;
+	
+	private String description;
+	private int amount;
+	private String date;
+	private int budget_id;
+	private int client_id;
+	
 	public String getDescription() {
 		return description;
 	}
@@ -28,16 +31,16 @@ public class ChargeDTO implements Serializable{
 		this.date = date;
 	}
 	public int getBudgetId() {
-		return budgetId;
+		return budget_id;
 	}
 	public void setBudgetId(int budgetId) {
-		this.budgetId = budgetId;
+		this.budget_id = budgetId;
 	}
-	public int getClienteId() {
-		return clienteId;
+	public int getClientId() {
+		return client_id;
 	}
-	public void setClienteId(int clienteId) {
-		this.clienteId = clienteId;
+	public void setClientId(int clienteId) {
+		this.client_id = clienteId;
 	}
 	
 	

@@ -4,23 +4,24 @@ import java.io.Serializable;
 import java.util.List;
 
 public class WorkBean implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	String name;
-	String description;
-	String address;
-	String startDate;
-	String end_date;
-	String personal_manager;
-	UserBean client;
-	List<UserBean> managers;
-	List<PaymentBean> payments;
-	
+
+	private String name;
+	private String description;
+	private String address;
+	private String startDate;
+	private String end_date;
+	private String personal_manager;
+	private PersonBean client;
+	private BudgetBean budget;
+	private List<PersonBean> managers;
+	private List<PaymentBean> payments;
+
 	// ***********************************************************************
-	
+
 	// GETTERS & SETTERS
-	
+
 	public String getName() {
 		return name;
 	}
@@ -63,7 +64,13 @@ public class WorkBean implements Serializable{
 	public void setClient(UserBean client) {
 		this.client = client;
 	}
-	public List<UserBean> getManagers() {
+	public BudgetBean getBudget() {
+		return budget;
+	}
+	public void setBudget(BudgetBean budget) {
+		this.budget = budget;
+	}
+	public List<PersonBean> getManagers() {
 		return managers;
 	}
 	public void setManagers(List<UserBean> managers) {
@@ -77,5 +84,5 @@ public class WorkBean implements Serializable{
 	}
 
 	// ***********************************************************************
-	
+
 }

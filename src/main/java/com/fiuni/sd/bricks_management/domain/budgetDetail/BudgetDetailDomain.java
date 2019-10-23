@@ -2,9 +2,11 @@ package com.fiuni.sd.bricks_management.domain.budgetDetail;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,10 +31,12 @@ public class BudgetDetailDomain implements BaseDomain{
 	@Column(name = "quantity")
 	private int quantity;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "budget_id")
 	private BudgetDomain budget;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "budget_concept_id")
 	private BudgetConceptDomain budget_concept;
 
 	// *****************************************************************************************************************

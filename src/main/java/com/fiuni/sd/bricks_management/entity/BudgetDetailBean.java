@@ -6,8 +6,8 @@ public class BudgetDetailBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	int amount;
-	int quantity;
+	private int amount;
+	private int quantity;
 	BudgetBean budget;
 	BudgetConceptBean budget_concept;
 	

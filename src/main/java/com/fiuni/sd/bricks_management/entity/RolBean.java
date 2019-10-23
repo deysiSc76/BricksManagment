@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 public class RolBean implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	String type;
-	List<UserBean> users;
-	
+
+	private String type;
+	private List<PersonBean> persons;
+
 	// ***********************************************************************
-	
+
 	// GETTERS & SETTERS
-	
+
 	public String getType() {
 		return type;
 	}
@@ -29,7 +29,7 @@ public class RolBean implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	// ***********************************************************************
-	
+
 }

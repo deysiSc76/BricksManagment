@@ -3,18 +3,18 @@ package com.fiuni.sd.bricks_management.entity;
 import java.io.Serializable;
 
 public class PersonalDebtBean implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	int amount;
-	String description;
-	PaymentBean payment;
-	UserBean user;
-	
+
+	private int amount;
+	private String description;
+	private PaymentBean payment;
+	private PersonBean person;
+
 	// ***********************************************************************
-	
+
 	// GETTERS & SETTERS
-	
+
 	public int getAmount() {
 		return amount;
 	}
@@ -39,7 +39,7 @@ public class PersonalDebtBean implements Serializable{
 	public void setUser(UserBean user) {
 		this.user = user;
 	}
-	
+
 	// ***********************************************************************
-	
+
 }

@@ -1,11 +1,11 @@
 package com.fiuni.sd.bricks_management.domain.budget;
 
-import java.util.ArrayList;
-
+import java.util.ArrayList; 
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +32,7 @@ public class BudgetDomain implements BaseDomain {
 	@Column(name = "total_amount")
 	private String total_amount;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "budget")
 	private WorkDomain work;
 	
 	@OneToMany(mappedBy = "budget")

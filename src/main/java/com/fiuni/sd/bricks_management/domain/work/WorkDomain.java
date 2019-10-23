@@ -1,17 +1,18 @@
 package com.fiuni.sd.bricks_management.domain.work;
 
 import java.util.ArrayList;
-
-
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
@@ -24,38 +25,42 @@ import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
 public class WorkDomain implements BaseDomain {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "address")
 	private String address;
-	
+
 	@Column(name = "start_date")
 	private String start_date;
-	
+
 	@Column(name = "end_date")
 	private String end_date;
-	
+
 	@Column(name = "personal_manager")
 	private String personal_manager;
-	
-	@ManyToOne
-	private UserDomain client;
-	
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "budget_id")
+	private BudgetDomain budget;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	private PersonDomain client;
+
 	@OneToMany(mappedBy = "work")
 	private List<PaymentDomain> payments = new ArrayList<>();
-
 	// ***********************************************************************************************************
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -120,6 +125,14 @@ public class WorkDomain implements BaseDomain {
 		this.client = client;
 	}
 
+	public BudgetDomain getBudget() {
+		return budget;
+	}
+
+	public void setBudget(BudgetDomain budget) {
+		this.budget = budget;
+	}
+
 	public List<PaymentDomain> getPayments() {
 		return payments;
 	}
@@ -129,14 +142,14 @@ public class WorkDomain implements BaseDomain {
 	}
 
 	// ***********************************************************************************************************
-	
+
 	@Override
 	public String toString() {
 		return "WorkDomain [id=" + id + ", name=" + name + ", description=" + description + ", address=" + address
-				+ ", startDate=" + start_date + ", endDate=" + end_date + ", personManager=" + personal_manager + ", client="
-				+ client + ", payments=" + payments + "]";
+				+ ", start_date=" + start_date + ", end_date=" + end_date + ", personal_manager=" + personal_manager
+				+ ", budget=" + budget + ", client=" + client + ", payments=" + payments + "]";
 	}
-	
+
 	// ***********************************************************************************************************
-	
+
 }

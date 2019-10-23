@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class WorkDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
-	String name;
-	String description;
-	int clientId;
-	String address;
-	String startDate;
-	String end_date;
-	String personnelManager;
-	int budgetId;
+	private String name;
+	private String description;
+	private int clientId;
+	private String address;
+	private String startDate;
+	private String end_date;
+	private String personnelManager;
+	private int budgetId;
 	public String getName() {
 		return name;
 	}

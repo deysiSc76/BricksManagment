@@ -7,16 +7,17 @@ public class UserBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	String name;
-	int number;
-	String address;
-	String comment;
-	String email;
-	String password;
-	List<RolBean> roles;
-	List<WorkBean> works;
-	List<WorkBean> client_works;
-	List<ChargeBean> client_charges;
+	private String name;
+	private int number;
+	private String address;
+	private String comment;
+	private String email;
+	private String password;
+	private PersonalDebtBean personal_debt;
+	private List<RolBean> roles;
+	private List<WorkBean> works;
+	private List<WorkBean> client_works;
+	private List<ChargeBean> client_charges;
 	
 	// ***********************************************************************
 	
@@ -57,6 +58,12 @@ public class UserBean implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public PersonalDebtBean getPersonalDeby() {
+		return personal_debt;
+	}
+	public void setPersonalDebt(PersonalDebtBean personal_debt) {
+		this.personal_debt = personal_debt;
 	}
 	public List<RolBean> getRoles() {
 		return roles;

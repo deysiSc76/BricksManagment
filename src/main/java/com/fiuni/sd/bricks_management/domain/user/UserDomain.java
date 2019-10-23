@@ -1,10 +1,7 @@
 package com.fiuni.sd.bricks_management.domain.user;
 
 import java.util.ArrayList;
-
-
 import java.util.List;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
@@ -28,30 +26,34 @@ import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
 public class UserDomain implements BaseDomain{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "number")
 	private int number;
-	
+
 	@Column(name = "address")
 	private String address;
-	
+
 	@Column(name = "comment")
 	private String comment;
-	
+
 	@Column(name = "email")
 	private String email;
-	
-	@Column(name = "password") 
+
+	@Column(name = "password")
 	private String password;
-	
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pesonal_debt_id")
+	private PersonalDebtDomain personal_debt;
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<RoleDomain> roles = new ArrayList<>();
@@ -62,12 +64,12 @@ public class UserDomain implements BaseDomain{
 
 	@OneToMany(mappedBy = "client")
 	private List<WorkDomain> client_works = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "client")
 	private List<ChargeDomain> client_charges = new ArrayList<>();
-	
+
 	// *****************************************************************************************************************
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -124,6 +126,14 @@ public class UserDomain implements BaseDomain{
 		this.password = password;
 	}
 
+	public PersonalDebtDomain getPersonalDebt() {
+		return personal_debt;
+	}
+
+	public void setPersonalDebt(PersonalDebtDomain personal_debt) {
+		this.personal_debt = personal_debt;
+	}
+
 	public List<RoleDomain> getRoles() {
 		return roles;
 	}
@@ -153,12 +163,11 @@ public class UserDomain implements BaseDomain{
 	@Override
 	public String toString() {
 		return "PersonDomain [id=" + id + ", name=" + name + ", number=" + number + ", address=" + address
-				+ ", comment=" + comment + ", email=" + email + ", password=" + password + ", roles=" + roles
-				+ ", user_works=" + user_works + ", client_charges="
-				+ client_charges + "]";
+				+ ", comment=" + comment + ", email=" + email + ", password=" + password + ", personal_debt="
+				+ personal_debt + ", roles=" + roles + ", people_works=" + people_works + ", client_works="
+				+ client_works + ", client_charges=" + client_charges + "]";
 	}
 
-	
 	// *****************************************************************************************************************
 
 }

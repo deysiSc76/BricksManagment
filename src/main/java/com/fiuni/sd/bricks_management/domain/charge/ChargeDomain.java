@@ -2,9 +2,11 @@ package com.fiuni.sd.bricks_management.domain.charge;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,27 +19,29 @@ import com.fiuni.sd.bricks_management.domain.user.UserDomain;
 public class ChargeDomain implements BaseDomain {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer id;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "amount")
 	private int amount;
-	
+
 	@Column(name = "date")
 	private String date;
-	
-	@ManyToOne
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "budget_id")
 	private BudgetDomain budget;
-	
-	@ManyToOne
-	private UserDomain client;
-	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id")
+	private PersonDomain client;
+
 	// *****************************************************************************************************************
 
 	public Integer getId() {
@@ -87,7 +91,7 @@ public class ChargeDomain implements BaseDomain {
 	public void setClient(UserDomain client) {
 		this.client = client;
 	}
-	
+
 	// *****************************************************************************************************************
 
 	@Override
@@ -97,5 +101,5 @@ public class ChargeDomain implements BaseDomain {
 	}
 
 	// *****************************************************************************************************************
-	
+
 }

@@ -7,9 +7,9 @@ public class BudgetConceptBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	String description;
-	List<BudgetDetailBean> budget_details;
-	List<PaymentConceptBean> payment_concepts;
+	private String description;
+	private List<BudgetDetailBean> budget_details;
+	private List<PaymentConceptBean> payment_concepts;
 	
 	// ***********************************************************************
 	

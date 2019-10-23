@@ -1,7 +1,6 @@
 package com.fiuni.sd.bricks_management.domain.budgetConcept;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.persistence.Column;

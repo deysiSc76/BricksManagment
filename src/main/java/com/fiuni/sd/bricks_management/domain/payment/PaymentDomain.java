@@ -1,17 +1,18 @@
 package com.fiuni.sd.bricks_management.domain.payment;
 
-import java.util.ArrayList;
-
-
+import java.util.ArrayList; 
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
@@ -48,16 +49,23 @@ public class PaymentDomain implements BaseDomain {
 	@Column(name = "document_type")
 	private String document_type;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "work_id")
 	private WorkDomain work;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "provider_id")
 	private ProviderDomain provider;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "personal_debt_id")
+	private PersonalDebtDomain personal_debt;
 	
 	@OneToMany(mappedBy = "payment")
 	private List<PaymentDetailDomain> payment_details = new ArrayList<>();
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "payment_detail_id")
 	private PaymentDetailDomain payment_detail;
 	
 	// *****************************************************************************************************************
@@ -133,6 +141,14 @@ public class PaymentDomain implements BaseDomain {
 	public void setProvider(ProviderDomain provider) {
 		this.provider = provider;
 	}
+	
+	public PersonalDebtDomain getPersonalDebt() {
+		return personal_debt;
+	}
+	
+	public void setPersonalDebt(PersonalDebtDomain personal_debt) {
+		this.personal_debt = personal_debt;
+	}
 
 	public List<PaymentDetailDomain> getPayment_details() {
 		return payment_details;
@@ -156,7 +172,7 @@ public class PaymentDomain implements BaseDomain {
 	public String toString() {
 		return "PaymentDomain [id=" + id + ", total=" + total + ", number=" + number + ", stamping=" + stamping
 				+ ", bill_type=" + bill_type + ", date=" + date + ", document_type=" + document_type + ", work=" + work
-				+ ", provider=" + provider + ", payment_details=" + payment_details
+				+ ", provider=" + provider + ", personal_debt=" + personal_debt + ", payment_details=" + payment_details
 				+ ", payment_detail=" + payment_detail + "]";
 	}
 
