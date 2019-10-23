@@ -1,8 +1,11 @@
 package com.fiuni.sd.bricks_management.dto.charge;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class ChargeDTO implements Serializable{
+import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
+
+@XmlRootElement(name = "person")
+public class ChargeDTO extends BaseDTO{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -43,6 +46,4 @@ public class ChargeDTO implements Serializable{
 		this.client_id = clienteId;
 	}
 	
-	
-
 }

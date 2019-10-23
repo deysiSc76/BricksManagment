@@ -1,4 +1,4 @@
-package com.fiuni.sd.bricks_management.dto;
+package com.fiuni.sd.bricks_management.dto.charge;
 
 import java.util.List;
 

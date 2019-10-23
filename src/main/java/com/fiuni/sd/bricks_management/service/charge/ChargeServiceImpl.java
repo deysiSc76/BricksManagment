@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fiuni.sd.bricks_management.dao.user.IUserDAO;
+import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.dao.budget.IBudgetDAO;
 import com.fiuni.sd.bricks_management.dao.charge.IChargeDAO;
-import com.fiuni.sd.bricks_management.domain.ChargeDomain;
-import com.fiuni.sd.bricks_management.dto.ChargeDTO;
-import com.fiuni.sd.bricks_management.dto.ChargeResult;
+import com.fiuni.sd.bricks_management.domain.charge.ChargeDomain;
+import com.fiuni.sd.bricks_management.dto.charge.ChargeDTO;
+import com.fiuni.sd.bricks_management.dto.charge.ChargeResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
 
 @Service
@@ -27,7 +27,7 @@ public class ChargeServiceImpl extends BaseServiceImpl<ChargeDTO, ChargeDomain, 
 	@Override
 	@Transactional
 	public ChargeDTO save(ChargeDTO dto) {
-		final ChargeDomain domain = converDtoToDomain(dto);
+		final ChargeDomain domain = convertDtoToDomain(dto);
 		final ChargeDomain chargeDomain = chargeDAO.save(domain);
 		return convertDomainToDto(chargeDomain);
 	}
@@ -58,7 +58,7 @@ public class ChargeServiceImpl extends BaseServiceImpl<ChargeDTO, ChargeDomain, 
 	}
 
 	@Override
-	protected ChargeDomain converDtoToDomain(ChargeDTO dto) {
+	protected ChargeDomain convertDtoToDomain(ChargeDTO dto) {
 		final ChargeDomain domain = new ChargeDomain();
 		domain.setAmount(dto.getAmount());
 		domain.setBudget(budgetDAO.findById(dto.getBudgetId()).get());
@@ -68,4 +68,5 @@ public class ChargeServiceImpl extends BaseServiceImpl<ChargeDTO, ChargeDomain, 
 		domain.setId(dto.getId());
 		return domain;
 	}
+
 }
