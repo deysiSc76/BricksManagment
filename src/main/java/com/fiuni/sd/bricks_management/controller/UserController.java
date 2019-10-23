@@ -13,33 +13,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fiuni.sd.bricks_management.dto.PersonDTO;
-import com.fiuni.sd.bricks_management.dto.PersonResult;
-import com.fiuni.sd.bricks_management.service.person.IPersonService;
+import com.fiuni.sd.bricks_management.dto.user.UserDTO;
+import com.fiuni.sd.bricks_management.dto.user.UserResult;
+import com.fiuni.sd.bricks_management.service.user.IUserService;
 import com.fiuni.sd.bricks_management.utils.Setting;
 
 @RestController
-@RequestMapping(value = "/people", method = RequestMethod.GET, produces = {"application/xml", "application/json"})
-public class PersonController {
+@RequestMapping(value = "/user", method = RequestMethod.GET, produces = {"application/xml", "application/json"})
+public class UserController {
 
 	@Autowired
-	private IPersonService personService;
+	private IUserService userService;
 	
 	//@GetMapping("/{id}")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/xml", "application/json" })
     @ResponseBody
-	public PersonDTO getById(@PathVariable(value = "id") Integer personId) {
-		return personService.getById(personId);
+	public UserDTO getById(@PathVariable(value = "id") Integer userId) {
+		return userService.getById(userId);
 	}
 	
 	@GetMapping(path = "/page/", params = {"page", "size"})
-	public PersonResult getPeople(@PathVariable(value = "page_num") Integer pageNum) {
-		return personService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
+	public UserResult getUsers(@PathVariable(value = "page_num") Integer pageNum) {
+		return userService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
 	
 	@PostMapping
-	public PersonDTO save(@Valid @RequestBody PersonDTO person) {
-		return personService.save(person);
+	public UserDTO save(@Valid @RequestBody UserDTO user) {
+		return userService.save(user);
 	}
 	
 }

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
 import com.fiuni.sd.bricks_management.domain.paymentDetail.PaymentDetailDomain;
+import com.fiuni.sd.bricks_management.domain.personalDebt.PersonalDebtDomain;
 import com.fiuni.sd.bricks_management.domain.provider.ProviderDomain;
 import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
 

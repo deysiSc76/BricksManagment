@@ -40,7 +40,7 @@ public class ChargeDomain implements BaseDomain {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
-	private PersonDomain client;
+	private UserDomain client;
 
 	// *****************************************************************************************************************
 

@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
 
 @XmlRootElement(name = "person")
-public class PersonDTO extends BaseDTO {
+public class UserDTO extends BaseDTO {
 
 	private static final long serialVersionUID = 1L;
 

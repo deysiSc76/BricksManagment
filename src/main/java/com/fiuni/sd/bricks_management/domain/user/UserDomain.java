@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
 import com.fiuni.sd.bricks_management.domain.charge.ChargeDomain;
+import com.fiuni.sd.bricks_management.domain.personalDebt.PersonalDebtDomain;
 import com.fiuni.sd.bricks_management.domain.role.RoleDomain;
 import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
 
@@ -164,7 +165,7 @@ public class UserDomain implements BaseDomain{
 	public String toString() {
 		return "PersonDomain [id=" + id + ", name=" + name + ", number=" + number + ", address=" + address
 				+ ", comment=" + comment + ", email=" + email + ", password=" + password + ", personal_debt="
-				+ personal_debt + ", roles=" + roles + ", people_works=" + people_works + ", client_works="
+				+ personal_debt + ", roles=" + roles + ", user_works=" + user_works + ", client_works="
 				+ client_works + ", client_charges=" + client_charges + "]";
 	}
 

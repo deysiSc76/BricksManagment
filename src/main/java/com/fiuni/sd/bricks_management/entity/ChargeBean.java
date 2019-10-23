@@ -10,7 +10,7 @@ public class ChargeBean implements Serializable {
 	private int amount;
 	private String date;
 	private BudgetBean budget;
-	private PersonBean cliente;
+	private UserBean cliente;
 
 	// ***********************************************************************
 

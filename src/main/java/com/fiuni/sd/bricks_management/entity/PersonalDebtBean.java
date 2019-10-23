@@ -9,7 +9,7 @@ public class PersonalDebtBean implements Serializable{
 	private int amount;
 	private String description;
 	private PaymentBean payment;
-	private PersonBean person;
+	private UserBean user;
 
 	// ***********************************************************************
 

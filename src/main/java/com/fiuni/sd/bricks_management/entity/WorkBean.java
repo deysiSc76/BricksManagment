@@ -13,9 +13,9 @@ public class WorkBean implements Serializable{
 	private String startDate;
 	private String end_date;
 	private String personal_manager;
-	private PersonBean client;
+	private UserBean client;
 	private BudgetBean budget;
-	private List<PersonBean> managers;
+	private List<UserBean> managers;
 	private List<PaymentBean> payments;
 
 	// ***********************************************************************
@@ -70,7 +70,7 @@ public class WorkBean implements Serializable{
 	public void setBudget(BudgetBean budget) {
 		this.budget = budget;
 	}
-	public List<PersonBean> getManagers() {
+	public List<UserBean> getManagers() {
 		return managers;
 	}
 	public void setManagers(List<UserBean> managers) {

@@ -34,7 +34,7 @@ public class PersonalDebtDomain implements BaseDomain {
 	private PaymentDomain payment;
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal_debt")
-	private PersonDomain person;
+	private UserDomain user;
 
 	// *****************************************************************************************************************
 

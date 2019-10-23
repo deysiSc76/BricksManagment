@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
+import com.fiuni.sd.bricks_management.domain.budget.BudgetDomain;
 import com.fiuni.sd.bricks_management.domain.payment.PaymentDomain;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
 import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
@@ -55,7 +56,7 @@ public class WorkDomain implements BaseDomain {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
-	private PersonDomain client;
+	private UserDomain client;
 
 	@OneToMany(mappedBy = "work")
 	private List<PaymentDomain> payments = new ArrayList<>();

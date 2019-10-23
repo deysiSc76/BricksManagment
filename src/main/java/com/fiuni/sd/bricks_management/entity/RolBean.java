@@ -8,7 +8,7 @@ public class RolBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String type;
-	private List<PersonBean> persons;
+	private List<UserBean> users;
 
 	// ***********************************************************************
 
