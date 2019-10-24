@@ -23,7 +23,7 @@ import com.fiuni.sd.bricks_management.domain.role.RoleDomain;
 import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class UserDomain implements BaseDomain{
 
 	private static final long serialVersionUID = 1L;

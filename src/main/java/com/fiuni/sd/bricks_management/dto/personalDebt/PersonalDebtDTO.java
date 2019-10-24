@@ -1,30 +1,24 @@
 package com.fiuni.sd.bricks_management.dto.personalDebt;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
-import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
-
-@XmlRootElement(name = "personal_debt")
-public class PersonalDebtDTO extends BaseDTO {
-	
+public class PersonalDebtDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int amount;
-	private String description;
-	
-	@XmlElement
+	private int description;
 	public int getAmount() {
 		return amount;
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	@XmlElement
-	public String getDescription() {
+	public int getDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
+	public void setDescription(int description) {
 		this.description = description;
 	}
+	
+	
 
 }
