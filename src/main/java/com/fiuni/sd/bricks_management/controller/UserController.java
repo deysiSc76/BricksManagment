@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.controller;
 
-import javax.validation.Valid; 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

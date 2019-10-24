@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
+import com.fiuni.sd.bricks_management.dao.personal_debt.IPersonalDebtDAO;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
 
@@ -21,6 +22,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 
 	@Autowired
 	private IUserDAO userDao;
+	@Autowired
+	private IPersonalDebtDAO personalDebtDao;
 	
 	@Override
 	@Transactional
@@ -56,6 +59,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		dto.setEmail(domain.getEmail());
 		dto.setName(domain.getName());
 		dto.setNumber(domain.getNumber());
+		dto.setPersonalDebtId(domain.getPersonalDebt().getId());
 		return dto;
 	}
 
@@ -68,6 +72,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		domain.setEmail(dto.getEmail());
 		domain.setName(dto.getName());
 		domain.setNumber(dto.getNumber());
+		domain.setPersonalDebt(personalDebtDao.findById(dto.getPersonalDebtId()).get());
 		return domain;
 	}
 	
