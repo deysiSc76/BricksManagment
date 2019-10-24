@@ -1,9 +1,10 @@
 package com.fiuni.sd.bricks_management.service.user;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Override
 	public UserResult getAll(Pageable pageable) {
 		final List<UserDTO> users = new ArrayList<>();
+		Page<UserDomain> results = userDao.findAll(pageable);
+		results.forEach(user -> users.add(convertDomainToDto(user)));
+		
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
 		return userResult;
