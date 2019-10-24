@@ -1,8 +1,12 @@
 package com.fiuni.sd.bricks_management.service.charge;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +46,13 @@ public class ChargeServiceImpl extends BaseServiceImpl<ChargeDTO, ChargeDomain, 
 	@Override
 	@Transactional
 	public ChargeResult getAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		final List<ChargeDTO> charges = new ArrayList<>();
+		Page<ChargeDomain> results = chargeDAO.findAll(pageable);
+		results.forEach(charge->charges.add(convertDomainToDto(charge)));
+		
+		final ChargeResult chargeResult = new ChargeResult();
+		chargeResult.setCharges(charges);
+		return chargeResult;
 	}
 
 	@Override
