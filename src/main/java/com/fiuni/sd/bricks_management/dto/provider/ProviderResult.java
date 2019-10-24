@@ -10,13 +10,4 @@ import com.fiuni.sd.bricks_management.dto.base.BaseResult;
 @XmlRootElement(name = "providerResult")
 public class ProviderResult extends BaseResult<ProviderDTO> {
 	private static final long serialVersionUID = 1L;
-
-	@XmlElement
-	public List<ProviderDTO> getProviders() {
-		return getList();
-	}
-
-	public void setProviders(List<ProviderDTO> dtos) {
-		super.setList(dtos);
-	}
 }

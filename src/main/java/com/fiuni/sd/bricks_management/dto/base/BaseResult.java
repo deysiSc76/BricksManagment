@@ -3,7 +3,7 @@ package com.fiuni.sd.bricks_management.dto.base;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class BaseResult<DTO extends BaseDTO> implements Serializable {
+public abstract class BaseResult <DTO extends BaseDTO> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

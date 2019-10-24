@@ -26,6 +26,9 @@ public class ProviderServiceImpl extends BaseServiceImpl<ProviderDTO, ProviderDo
 	@Override
 	@Transactional
 	public ProviderDTO save(ProviderDTO dto) {
+		// todo: recibir un full payment dto y recorrer sus detalles 
+		// que se obtienen desde get details y guardar uno por uno
+		// y al final devolver un full provider dto
 		final ProviderDomain providerDomain = convertDtoToDomain(dto);
 		final ProviderDomain provider = providerDao.save(providerDomain);
 		return convertDomainToDto(provider);
@@ -34,8 +37,8 @@ public class ProviderServiceImpl extends BaseServiceImpl<ProviderDTO, ProviderDo
 	@Override
 	@Transactional
 	public ProviderDTO getById(Integer id) {
-		final ProviderDomain providerDomain = providerDao.findById(id).get();
-		return convertDomainToDto(providerDomain);
+		final ProviderDomain providerDomain = providerDao.findById(id).orElse(null);
+		return providerDomain == null ? null :  convertDomainToDto(providerDomain);
 	}
 
 
@@ -47,7 +50,7 @@ public class ProviderServiceImpl extends BaseServiceImpl<ProviderDTO, ProviderDo
 		results.forEach(provider->providers.add(convertDomainToDto(provider)));
 		
 		final ProviderResult providerResult = new ProviderResult();
-		providerResult.setProviders(providers);
+		providerResult.setList(providers);
 		return providerResult;
 	}
 
@@ -73,6 +76,11 @@ public class ProviderServiceImpl extends BaseServiceImpl<ProviderDTO, ProviderDo
 		provider.setAddress(dto.getAddress());
 		provider.setRuc(dto.getRuc());
 		return provider;
+	}
+
+	@Override
+	public void delete(Integer providerId) {
+		providerDao.deleteById(providerId);
 	}
 
 	

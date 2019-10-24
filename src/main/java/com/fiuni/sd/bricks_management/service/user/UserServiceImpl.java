@@ -42,6 +42,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		userResult.setUsers(users);
 		return userResult;
 	}
+	public void delete(Integer id) {
+		userDao.deleteById(id);
+		
+	}
+	
+	
 	
 	@Override
 	protected UserDTO convertDomainToDto(UserDomain domain) {
