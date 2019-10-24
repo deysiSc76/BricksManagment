@@ -62,8 +62,6 @@ public class ProviderServiceImpl extends BaseServiceImpl<ProviderDTO, ProviderDo
 		provider.setNumber(domain.getNumber());
 		provider.setAddress(domain.getAddress());
 		provider.setRuc(domain.getRuc());
-		
-		
 		return provider;
 	}
 

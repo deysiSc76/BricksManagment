@@ -1,9 +1,10 @@
 package com.fiuni.sd.bricks_management.service.user;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
+import com.fiuni.sd.bricks_management.dao.personal_debt.IPersonalDebtDAO;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
 
@@ -20,6 +22,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 
 	@Autowired
 	private IUserDAO userDao;
+	@Autowired
+	private IPersonalDebtDAO personalDebtDao;
 	
 	@Override
 	@Transactional
@@ -38,6 +42,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Override
 	public UserResult getAll(Pageable pageable) {
 		final List<UserDTO> users = new ArrayList<>();
+		Page<UserDomain> results = userDao.findAll(pageable);
+		results.forEach(user -> users.add(convertDomainToDto(user)));
+		
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
 		return userResult;
@@ -58,6 +65,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		dto.setEmail(domain.getEmail());
 		dto.setName(domain.getName());
 		dto.setNumber(domain.getNumber());
+		dto.setPersonalDebtId(domain.getPersonalDebt().getId());
 		return dto;
 	}
 
@@ -70,6 +78,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		domain.setEmail(dto.getEmail());
 		domain.setName(dto.getName());
 		domain.setNumber(dto.getNumber());
+		domain.setPersonalDebt(personalDebtDao.findById(dto.getPersonalDebtId()).get());
 		return domain;
 	}
 	
