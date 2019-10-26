@@ -15,6 +15,7 @@ public class UserDTO extends BaseDTO {
 	private String address;
 	private String comentario;
 	private String email;
+	private String password;
 	private Integer personal_debt_id;
 
 	@XmlElement
@@ -58,5 +59,12 @@ public class UserDTO extends BaseDTO {
 	}
 	public void setPersonalDebtId(Integer personal_debt_id) {
 		this.personal_debt_id = personal_debt_id;
+	}
+	@XmlElement
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

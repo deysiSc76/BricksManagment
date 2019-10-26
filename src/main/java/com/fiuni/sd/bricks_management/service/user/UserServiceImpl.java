@@ -49,12 +49,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		userResult.setUsers(users);
 		return userResult;
 	}
+	
 	public void delete(Integer id) {
 		userDao.deleteById(id);
-		
 	}
-	
-	
 	
 	@Override
 	protected UserDTO convertDomainToDto(UserDomain domain) {
@@ -65,6 +63,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		dto.setEmail(domain.getEmail());
 		dto.setName(domain.getName());
 		dto.setNumber(domain.getNumber());
+		dto.setPassword(domain.getPassword());
 		dto.setPersonalDebtId(domain.getPersonalDebt().getId());
 		return dto;
 	}
@@ -78,8 +77,26 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		domain.setEmail(dto.getEmail());
 		domain.setName(dto.getName());
 		domain.setNumber(dto.getNumber());
+		domain.setPassword(dto.getPassword());
 		domain.setPersonalDebt(personalDebtDao.findById(dto.getPersonalDebtId()).get());
 		return domain;
+	}
+
+	@Override
+	public UserDTO update(Integer id, UserDTO user) {
+		UserDomain toUpdate = userDao.findById(id).get();
+		UserDomain newUser = convertDtoToDomain(user);
+		toUpdate.setAddress(newUser.getAddress());
+		toUpdate.setComment(newUser.getComment());
+		toUpdate.setEmail(newUser.getEmail());
+		toUpdate.setName(newUser.getName());
+		toUpdate.setNumber(newUser.getNumber());
+		toUpdate.setPassword(newUser.getPassword());
+		toUpdate.setPersonalDebt(newUser.getPersonalDebt());
+		
+		userDao.save(toUpdate);
+		
+		return convertDomainToDto(toUpdate);
 	}
 	
 }

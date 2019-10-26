@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiuni.sd.bricks_management.dto.user.UserDTO;
@@ -34,11 +35,9 @@ public class UserController {
 		return userService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = { "application/xml", "application/json" })
-    @ResponseBody
-	public UserDTO update(@PathVariable(value = "id") Integer userId, @Valid @RequestBody UserDTO user) {
-		user.setId(userId);
-		return userService.save(user);
+	@PutMapping("/{id}")
+	public UserDTO update(@PathVariable(value = "id") Integer id, @Valid @RequestBody UserDTO user) {
+		return userService.update(id, user);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

@@ -1,8 +1,8 @@
 package com.fiuni.sd.bricks_management.domain.personalDebt;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,10 +30,10 @@ public class PersonalDebtDomain implements BaseDomain {
 	@Column(name = "description")
 	private String description;
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal_debt")
+	@OneToOne(mappedBy = "personal_debt")
 	private PaymentDomain payment;
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "personal_debt")
+	@OneToOne(mappedBy = "personal_debt", cascade = CascadeType.ALL, orphanRemoval = true)
 	private UserDomain user;
 
 	// *****************************************************************************************************************

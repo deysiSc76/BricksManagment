@@ -3,6 +3,7 @@ package com.fiuni.sd.bricks_management.domain.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,8 +52,8 @@ public class UserDomain implements BaseDomain{
 	@Column(name = "password")
 	private String password;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pesonal_debt_id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pesonal_debt_id", unique = true)
 	private PersonalDebtDomain personal_debt;
 
 	@ManyToMany(fetch = FetchType.LAZY)
