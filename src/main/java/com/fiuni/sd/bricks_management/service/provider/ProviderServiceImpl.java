@@ -26,9 +26,6 @@ public class ProviderServiceImpl extends BaseServiceImpl<ProviderDTO, ProviderDo
 	@Override
 	@Transactional
 	public ProviderDTO save(ProviderDTO dto) {
-		// todo: recibir un full payment dto y recorrer sus detalles 
-		// que se obtienen desde get details y guardar uno por uno
-		// y al final devolver un full provider dto
 		final ProviderDomain providerDomain = convertDtoToDomain(dto);
 		final ProviderDomain provider = providerDao.save(providerDomain);
 		return convertDomainToDto(provider);

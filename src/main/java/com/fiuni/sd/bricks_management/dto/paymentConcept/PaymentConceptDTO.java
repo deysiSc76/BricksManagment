@@ -2,9 +2,12 @@ package com.fiuni.sd.bricks_management.dto.paymentConcept;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class PaymentConceptDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
+
+@XmlRootElement(name = "paymentDetail")
+public class PaymentConceptDTO extends BaseDTO {
 
 	private String name;
 	private int cost;

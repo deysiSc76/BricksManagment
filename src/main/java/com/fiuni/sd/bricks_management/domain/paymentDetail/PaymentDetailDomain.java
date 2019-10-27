@@ -36,8 +36,8 @@ public class PaymentDetailDomain implements BaseDomain {
 	private int quantity;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "payment_conceptP_id")
-  	private PaymentDomain payment_conceptP;
+	@JoinColumn(name = "payment_related_id")
+  	private PaymentDomain payment_related;
   	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "payment_id")
@@ -76,12 +76,12 @@ public class PaymentDetailDomain implements BaseDomain {
 		this.quantity = quantity;
 	}
 
-	public PaymentDomain getPayment_conceptP() {
-		return payment_conceptP;
+	public PaymentDomain getPayment_related() {
+		return payment_related;
 	}
 
-	public void setPayment_conceptP(PaymentDomain payment_conceptP) {
-		this.payment_conceptP = payment_conceptP;
+	public void setPayment_related(PaymentDomain payment_related) {
+		this.payment_related = payment_related;
 	}
 
 	public PaymentDomain getPayment() {
@@ -113,7 +113,7 @@ public class PaymentDetailDomain implements BaseDomain {
 	@Override
 	public String toString() {
 		return "PaymentDetailDomain [id=" + id + ", unit_price=" + unit_price + ", quantity=" + quantity
-				+ ", payment_conceptP=" + payment_conceptP + ", payment=" + payment + ", payment_concept="
+				+ ", payment_conceptP=" + payment_related + ", payment=" + payment + ", payment_concept="
 				+ payment_concept + ", payments=" + payments + "]";
 	}
 	

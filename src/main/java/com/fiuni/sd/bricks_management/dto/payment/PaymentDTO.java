@@ -24,15 +24,7 @@ public class PaymentDTO extends BaseDTO{
 	private int number;
 	private int stamping;
 	private int billType;
-	private List<PaymentDetailDTO> details;
 	
-	@XmlElement
-	public List<PaymentDetailDTO> getDetails() {
-		return details;
-	}
-	public void setDetails(List<PaymentDetailDomain> list) {
-		this.details = list;
-	}
 	@XmlElement
 	public int getWorkId() {
 		return workId;

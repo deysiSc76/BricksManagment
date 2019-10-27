@@ -2,7 +2,12 @@ package com.fiuni.sd.bricks_management.dto.paymentDetail;
 
 import java.io.Serializable;
 
-public class PaymentDetailDTO implements Serializable{
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
+
+@XmlRootElement(name = "paymentDetail")
+public class PaymentDetailDTO extends BaseDTO {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -10,13 +15,13 @@ public class PaymentDetailDTO implements Serializable{
 	private int quantity;
 	private int payment_id;
 	private int paymentConceptId;
-	private int paymentConceptPId;
+	private int paymentRealatedId;
 	
-	public int getPaymentConcepPtId() {
-		return paymentConceptPId;
+	public int getPaymentRelatedId() {
+		return paymentRealatedId;
 	}
-	public void setPaymentConceptPId(int paymentConceptPId) {
-		this.paymentConceptPId = paymentConceptPId;
+	public void setPaymentRelatedId(int paymentRelatedId) {
+		this.paymentRealatedId = paymentRelatedId;
 	}
 	public int getPaymentId() {
 		return payment_id;
@@ -41,6 +46,13 @@ public class PaymentDetailDTO implements Serializable{
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof PaymentDetailDTO) {
+			return ((PaymentDetailDTO) obj).getId().equals(getId());
+		}
+		return false;
 	}
 	
 
