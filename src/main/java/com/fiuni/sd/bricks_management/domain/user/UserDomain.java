@@ -51,17 +51,18 @@ public class UserDomain implements BaseDomain{
 
 	@Column(name = "password")
 	private String password;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pesonal_debt_id", unique = true)
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private PersonalDebtDomain personal_debt;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<RoleDomain> roles = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_works", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "work_id"))
+	@JoinTable(name = "user_works", joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "work_id"))
 	private List<WorkDomain> user_works = new ArrayList<>();
 
 	@OneToMany(mappedBy = "client")

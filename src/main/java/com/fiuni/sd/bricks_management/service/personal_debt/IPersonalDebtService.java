@@ -5,5 +5,9 @@ import com.fiuni.sd.bricks_management.dto.personalDebt.PersonalDebtResult;
 import com.fiuni.sd.bricks_management.service.base.IBaseService;
 
 public interface IPersonalDebtService extends IBaseService<PersonalDebtDTO, PersonalDebtResult> {
-
+	
+	public void delete(Integer id);
+	
+	public PersonalDebtDTO update(Integer id, PersonalDebtDTO personalDebt);
+	
 }

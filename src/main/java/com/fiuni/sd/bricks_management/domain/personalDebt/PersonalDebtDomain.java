@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,7 +34,8 @@ public class PersonalDebtDomain implements BaseDomain {
 	@OneToOne(mappedBy = "personal_debt")
 	private PaymentDomain payment;
 
-	@OneToOne(mappedBy = "personal_debt", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", unique = true)
 	private UserDomain user;
 
 	// *****************************************************************************************************************

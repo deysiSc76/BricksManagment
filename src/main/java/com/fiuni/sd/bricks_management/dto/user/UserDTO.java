@@ -1,5 +1,7 @@
 package com.fiuni.sd.bricks_management.dto.user;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,7 +18,7 @@ public class UserDTO extends BaseDTO {
 	private String comentario;
 	private String email;
 	private String password;
-	private Integer personal_debt_id;
+	private List<Integer> roles_id;
 
 	@XmlElement
 	public String getEmail() {
@@ -54,17 +56,17 @@ public class UserDTO extends BaseDTO {
 		this.comentario = comentario;
 	}
 	@XmlElement
-	public Integer getPersonalDebtId() {
-		return personal_debt_id;
-	}
-	public void setPersonalDebtId(Integer personal_debt_id) {
-		this.personal_debt_id = personal_debt_id;
-	}
-	@XmlElement
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	@XmlElement
+	public List<Integer> getRoles() {
+		return roles_id;
+	}
+	public void setRoles(List<Integer> roles_id) {
+		this.roles_id = roles_id;
 	}
 }
