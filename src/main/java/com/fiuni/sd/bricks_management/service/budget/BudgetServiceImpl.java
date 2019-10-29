@@ -23,7 +23,8 @@ import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailDTO;
 import com.fiuni.sd.bricks_management.dto.charge.ChargeDTO;
 
 @Service
-public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,BudgetResult>{
+public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,BudgetResult>
+	implements IBudgetService{
 	
 	@Autowired
 	private IBudgetDAO budgetDao;
@@ -40,7 +41,18 @@ public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,Bu
 		BudgetDomain budgetDomain = convertDtoToDomain(dto);
 		return convertDomainToDto(budgetDao.save(budgetDomain));
 	}
-
+	
+	
+	@Override
+	public BudgetDTO update(BudgetDTO dto, Integer budgetId) {
+		BudgetDTO toUpdate = convertDomainToDto(budgetDao.findById(budgetId).get());
+		toUpdate.setTotalAmount(dto.getTotalAmount());
+		toUpdate.setWorkId(dto.getWorkId());
+		toUpdate.setDetailDtos(dto.getDetailDtos());
+		toUpdate.setChargeDtos(dto.getChargeDtos());
+		return save(toUpdate);
+	}
+	
 	@Override
 	public BudgetDTO getById(Integer id) {
 		return convertDomainToDto( budgetDao.findById(id).get() );

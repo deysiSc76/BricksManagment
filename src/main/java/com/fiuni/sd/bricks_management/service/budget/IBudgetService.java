@@ -8,5 +8,5 @@ import com.fiuni.sd.bricks_management.service.base.IBaseService;
 
 @Service
 public interface IBudgetService extends IBaseService<BudgetDTO,BudgetResult>{
-	
+	public BudgetDTO update(BudgetDTO dto, Integer id);
 }
