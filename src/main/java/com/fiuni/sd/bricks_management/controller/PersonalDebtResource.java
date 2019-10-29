@@ -4,19 +4,21 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fiuni.sd.bricks_management.dto.personalDebt.PersonalDebtDTO;
 import com.fiuni.sd.bricks_management.dto.personalDebt.PersonalDebtResult;
 import com.fiuni.sd.bricks_management.service.personal_debt.IPersonalDebtService;
 import com.fiuni.sd.bricks_management.utils.Setting;
 
-@Controller
+@RestController
 @RequestMapping("/personal_debts")
 public class PersonalDebtResource {
 
@@ -37,4 +39,15 @@ public class PersonalDebtResource {
 	public PersonalDebtDTO save(@Valid @RequestBody PersonalDebtDTO personalDebt) {
 		return personalDebtService.save(personalDebt);
 	}
+	
+	@PutMapping("/{id}")
+	public PersonalDebtDTO update(@PathVariable(value = "id") Integer id, @Valid @RequestBody PersonalDebtDTO personalDebt) {
+		return personalDebtService.update(id, personalDebt);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void destroy(@PathVariable(value = "id") Integer id) {
+		personalDebtService.delete(id);
+	}
+	
 }
