@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiuni.sd.bricks_management.dto.charge.ChargeDTO;
+import com.fiuni.sd.bricks_management.dto.charge.ChargeResult;
 import com.fiuni.sd.bricks_management.service.charge.IChargeService;
 
 @RestController
@@ -27,5 +28,7 @@ public class ChargeController {
 	@GetMapping("/{id}")
 	public ChargeDTO getById(@PathVariable(value = "id") Integer id) {
 		return chargeService.getById(id);
-	};
+	}
+	
+	
 }

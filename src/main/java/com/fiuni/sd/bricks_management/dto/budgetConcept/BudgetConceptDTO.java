@@ -1,9 +1,9 @@
 package com.fiuni.sd.bricks_management.dto.budgetConcept;
 
-import java.io.Serializable;
+import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
 
 
-public class BudgetConceptDTO implements Serializable{
+public class BudgetConceptDTO extends BaseDTO{
 	
 	private static final long serialVersionUID = 1L;
 	

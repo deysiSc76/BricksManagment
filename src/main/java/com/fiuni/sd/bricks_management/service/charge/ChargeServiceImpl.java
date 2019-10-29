@@ -54,6 +54,24 @@ public class ChargeServiceImpl extends BaseServiceImpl<ChargeDTO, ChargeDomain, 
 		chargeResult.setCharges(charges);
 		return chargeResult;
 	}
+	
+	/* Retorna una lista de domains a partir de otra de dtos */
+	public List<ChargeDomain> convertToDomainList( List<ChargeDTO> dtoList ) {
+		ArrayList<ChargeDomain> domains = new ArrayList<>();
+		for( ChargeDTO dto : dtoList ) {
+			domains.add( convertDtoToDomain(dto) );
+		}
+		return domains;
+	}
+	
+	/* Retorna una lista de dtos a partir de otra de domains */
+	public List<ChargeDTO> convertToDtoList( List<ChargeDomain> domainList ){
+		ArrayList<ChargeDTO> dtos = new ArrayList<>();
+		for( ChargeDomain domain : domainList ) {
+			dtos.add( convertDomainToDto(domain) );
+		}
+		return dtos;
+	}
 
 	@Override
 	protected ChargeDTO convertDomainToDto(ChargeDomain domain) {
@@ -77,5 +95,4 @@ public class ChargeServiceImpl extends BaseServiceImpl<ChargeDTO, ChargeDomain, 
 		domain.setId(dto.getId());
 		return domain;
 	}
-
 }

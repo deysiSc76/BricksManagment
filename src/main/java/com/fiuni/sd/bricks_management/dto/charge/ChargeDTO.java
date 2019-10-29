@@ -1,5 +1,6 @@
 package com.fiuni.sd.bricks_management.dto.charge;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
@@ -15,30 +16,35 @@ public class ChargeDTO extends BaseDTO{
 	private int budget_id;
 	private int client_id;
 	
+	@XmlElement
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@XmlElement
 	public int getAmount() {
 		return amount;
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+	@XmlElement
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
 	}
+	@XmlElement
 	public int getBudgetId() {
 		return budget_id;
 	}
 	public void setBudgetId(int budgetId) {
 		this.budget_id = budgetId;
 	}
+	@XmlElement
 	public int getClientId() {
 		return client_id;
 	}
