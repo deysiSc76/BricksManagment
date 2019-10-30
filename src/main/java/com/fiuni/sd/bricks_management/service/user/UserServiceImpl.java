@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.user;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
-import com.fiuni.sd.bricks_management.dao.personal_debt.IPersonalDebtDAO;
+import com.fiuni.sd.bricks_management.dao.role.IRoleDAO;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
+import com.fiuni.sd.bricks_management.domain.role.RoleDomain;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
 
 @Service
@@ -23,7 +24,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Autowired
 	private IUserDAO userDao;
 	@Autowired
-	private IPersonalDebtDAO personalDebtDao;
+	private IRoleDAO roleDao;
 	
 	@Override
 	@Transactional
@@ -64,7 +65,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		dto.setName(domain.getName());
 		dto.setNumber(domain.getNumber());
 		dto.setPassword(domain.getPassword());
-		dto.setPersonalDebtId(domain.getPersonalDebt().getId());
+		
+		final List<Integer> roles_id = new ArrayList<>();
+		final List<RoleDomain> user_roles = domain.getRoles();
+		user_roles.forEach(user_role -> roles_id.add(user_role.getId()));
+		dto.setRoles(roles_id);
+		
 		return dto;
 	}
 
@@ -78,7 +84,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		domain.setName(dto.getName());
 		domain.setNumber(dto.getNumber());
 		domain.setPassword(dto.getPassword());
-		domain.setPersonalDebt(personalDebtDao.findById(dto.getPersonalDebtId()).get());
+		
+		final List<RoleDomain> roles = new ArrayList<>();
+		final List<Integer> roles_id = dto.getRoles();
+		roles_id.forEach(id -> roles.add(roleDao.findById(id).get()));
+		domain.setRoles(roles);
+		
 		return domain;
 	}
 
@@ -86,6 +97,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	public UserDTO update(Integer id, UserDTO user) {
 		UserDomain toUpdate = userDao.findById(id).get();
 		UserDomain newUser = convertDtoToDomain(user);
+		
 		toUpdate.setAddress(newUser.getAddress());
 		toUpdate.setComment(newUser.getComment());
 		toUpdate.setEmail(newUser.getEmail());
@@ -93,10 +105,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		toUpdate.setNumber(newUser.getNumber());
 		toUpdate.setPassword(newUser.getPassword());
 		toUpdate.setPersonalDebt(newUser.getPersonalDebt());
+		toUpdate.setRoles(newUser.getRoles());
 		
-		userDao.save(toUpdate);
-		
-		return convertDomainToDto(toUpdate);
+		return convertDomainToDto(userDao.save(toUpdate));
 	}
 	
 }

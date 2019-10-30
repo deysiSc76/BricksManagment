@@ -30,7 +30,7 @@ public class BudgetDomain implements BaseDomain {
 	private Integer id;
 	
 	@Column(name = "total_amount")
-	private String total_amount;
+	private Integer total_amount;
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "budget")
 	private WorkDomain work;
@@ -51,11 +51,11 @@ public class BudgetDomain implements BaseDomain {
 		this.id = id;
 	}
 
-	public String getTotal_amount() {
+	public Integer getTotalAmount() {
 		return total_amount;
 	}
 
-	public void setTotal_amount(String total_amount) {
+	public void setTotalAmount(Integer total_amount) {
 		this.total_amount = total_amount;
 	}
 

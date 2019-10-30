@@ -11,6 +11,7 @@ public class PersonalDebtDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	private int amount;
 	private String description;
+	private Integer user_id;
 	
 	@XmlElement
 	public int getAmount() {
@@ -26,5 +27,11 @@ public class PersonalDebtDTO extends BaseDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	@XmlElement
+	public Integer getUserId() {
+		return user_id;
+	}
+	public void setUserId(Integer user_id) {
+		this.user_id = user_id;
+	}
 }
