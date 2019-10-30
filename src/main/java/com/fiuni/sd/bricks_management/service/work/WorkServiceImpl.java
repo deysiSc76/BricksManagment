@@ -86,7 +86,7 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 		workDao.deleteById(workId);
 		
 	}
-
+	@Override
 	public WorkDTO update(Integer id, WorkDTO work) {
 		WorkDomain toUpdate = workDao.findById(id).get();
 		WorkDomain newWork = convertDtoToDomain(work);
