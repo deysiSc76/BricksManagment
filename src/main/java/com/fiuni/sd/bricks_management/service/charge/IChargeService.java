@@ -8,5 +8,5 @@ import com.fiuni.sd.bricks_management.service.base.IBaseService;
 
 @Service
 public interface IChargeService extends IBaseService<ChargeDTO, ChargeResult>{
-	
+	public ChargeDTO update(ChargeDTO dto, Integer id);
 }

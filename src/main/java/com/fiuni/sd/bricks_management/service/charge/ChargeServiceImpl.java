@@ -42,34 +42,42 @@ public class ChargeServiceImpl extends BaseServiceImpl<ChargeDTO, ChargeDomain, 
 		final ChargeDomain domain = chargeDAO.findById(id).get();
 		return convertDomainToDto(domain);
 	}
-
+	
+	@Override
+	@Transactional
+	public ChargeDTO update(ChargeDTO dto, Integer id) {
+		final ChargeDTO toUpdate = convertDomainToDto(chargeDAO.findById(id).get());
+		toUpdate.setAmount(dto.getAmount());
+		toUpdate.setBudgetId(dto.getBudgetId());
+		toUpdate.setClientId(dto.getClientId());
+		toUpdate.setDate(dto.getDate());
+		toUpdate.setDescription(dto.getDescription());
+		return convertDomainToDto( chargeDAO.save( convertDtoToDomain(toUpdate) ) );
+	}
+	
 	@Override
 	@Transactional
 	public ChargeResult getAll(Pageable pageable) {
-		final List<ChargeDTO> charges = new ArrayList<>();
-		Page<ChargeDomain> results = chargeDAO.findAll(pageable);
-		results.forEach(charge->charges.add(convertDomainToDto(charge)));
+		final List<ChargeDTO> chargeDtos = new ArrayList<>();
+		Page<ChargeDomain> resultDomains = chargeDAO.findAll(pageable);
+		resultDomains.forEach(charge -> chargeDtos.add(convertDomainToDto(charge)));
 		
 		final ChargeResult chargeResult = new ChargeResult();
-		chargeResult.setCharges(charges);
+		chargeResult.setCharges(chargeDtos);
 		return chargeResult;
 	}
 	
 	/* Retorna una lista de domains a partir de otra de dtos */
 	public List<ChargeDomain> convertToDomainList( List<ChargeDTO> dtoList ) {
 		ArrayList<ChargeDomain> domains = new ArrayList<>();
-		for( ChargeDTO dto : dtoList ) {
-			domains.add( convertDtoToDomain(dto) );
-		}
+		dtoList.forEach( dto -> domains.add( convertDtoToDomain(dto) ) );
 		return domains;
 	}
 	
 	/* Retorna una lista de dtos a partir de otra de domains */
 	public List<ChargeDTO> convertToDtoList( List<ChargeDomain> domainList ){
 		ArrayList<ChargeDTO> dtos = new ArrayList<>();
-		for( ChargeDomain domain : domainList ) {
-			dtos.add( convertDomainToDto(domain) );
-		}
+		domainList.forEach( domain -> dtos.add( convertDomainToDto(domain) ) );
 		return dtos;
 	}
 
