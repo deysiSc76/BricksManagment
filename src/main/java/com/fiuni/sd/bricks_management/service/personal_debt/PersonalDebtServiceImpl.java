@@ -84,5 +84,16 @@ public class PersonalDebtServiceImpl extends BaseServiceImpl<PersonalDebtDTO, Pe
 		
 		return convertDomainToDto(personalDebtDao.save(toUpdate));
 	}
+
+	@Override
+	public PersonalDebtResult getByDescription(String description, Pageable pageable) {
+		final List<PersonalDebtDTO> personalDebts = new ArrayList<>();
+		Page<PersonalDebtDomain> results = personalDebtDao.findByDescription(description, pageable);
+		results.forEach(personalDebt -> personalDebts.add(convertDomainToDto(personalDebt)));
+		
+		final PersonalDebtResult personalDebtResult = new PersonalDebtResult();
+		personalDebtResult.setPersonalDebts(personalDebts);
+		return personalDebtResult;
+	}
 	
 }

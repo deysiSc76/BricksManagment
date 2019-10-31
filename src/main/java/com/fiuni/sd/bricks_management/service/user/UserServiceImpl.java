@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fiuni.sd.bricks_management.dao.role.IRoleDao;
+import com.fiuni.sd.bricks_management.dao.role.IRoleDAO;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.domain.role.RoleDomain;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
@@ -24,7 +24,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Autowired
 	private IUserDAO userDao;
 	@Autowired
-	private IRoleDao roleDao;
+	private IRoleDAO roleDao;
 	
 	@Override
 	@Transactional
@@ -35,15 +35,55 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	}
 
 	@Override
+	@Transactional
 	public UserDTO getById(Integer id) {
 		final UserDomain domain = userDao.findById(id).get();
 		return convertDomainToDto(domain);
 	}
 
 	@Override
+	@Transactional
 	public UserResult getAll(Pageable pageable) {
 		final List<UserDTO> users = new ArrayList<>();
 		Page<UserDomain> results = userDao.findAll(pageable);
+		results.forEach(user -> users.add(convertDomainToDto(user)));
+		
+		final UserResult userResult = new UserResult();
+		userResult.setUsers(users);
+		return userResult;
+	}
+	
+	@Override
+	@Transactional
+	public UserResult getByName(String name, Pageable pageable) {
+		final List<UserDTO> users = new ArrayList<>();
+		Page<UserDomain> results = userDao.findByName(name, pageable);
+		results.forEach(user -> users.add(convertDomainToDto(user)));
+		
+		final UserResult userResult = new UserResult();
+		userResult.setUsers(users);
+		
+		return userResult;
+	}
+	
+	@Override
+	@Transactional
+	public UserResult getByLastName(String lastName, Pageable pageable) {
+		final List<UserDTO> users = new ArrayList<>();
+		Page<UserDomain> results = userDao.findByLastName(lastName, pageable);
+		results.forEach(user -> users.add(convertDomainToDto(user)));
+		
+		final UserResult userResult = new UserResult();
+		userResult.setUsers(users);
+		
+		return userResult;
+	}
+	
+	@Override
+	@Transactional
+	public UserResult getByNameAndLastName(String name, String lastName, Pageable pageable) {
+		final List<UserDTO> users = new ArrayList<>();
+		Page<UserDomain> results = userDao.findByNameAndLastName(name, lastName, pageable);
 		results.forEach(user -> users.add(convertDomainToDto(user)));
 		
 		final UserResult userResult = new UserResult();
@@ -61,8 +101,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		dto.setId(domain.getId());
 		dto.setAddress(domain.getAddress());
 		dto.setComentario(domain.getComment());
+		dto.setDocument(domain.getDocument());
 		dto.setEmail(domain.getEmail());
 		dto.setName(domain.getName());
+		dto.setLastName(domain.getLastName());
 		dto.setNumber(domain.getNumber());
 		dto.setPassword(domain.getPassword());
 		
@@ -80,7 +122,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		domain.setId(dto.getId());
 		domain.setAddress(dto.getAddress());
 		domain.setComment(dto.getComentario());
+		domain.setDocument(dto.getDocument());
 		domain.setEmail(dto.getEmail());
+		domain.setLastName(dto.getLastName());
 		domain.setName(dto.getName());
 		domain.setNumber(dto.getNumber());
 		domain.setPassword(dto.getPassword());
@@ -94,13 +138,16 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	}
 
 	@Override
+	@Transactional
 	public UserDTO update(Integer id, UserDTO user) {
 		UserDomain toUpdate = userDao.findById(id).get();
 		UserDomain newUser = convertDtoToDomain(user);
 		
 		toUpdate.setAddress(newUser.getAddress());
 		toUpdate.setComment(newUser.getComment());
+		toUpdate.setDocument(newUser.getDocument());
 		toUpdate.setEmail(newUser.getEmail());
+		toUpdate.setLastName(newUser.getLastName());
 		toUpdate.setName(newUser.getName());
 		toUpdate.setNumber(newUser.getNumber());
 		toUpdate.setPassword(newUser.getPassword());
@@ -109,5 +156,5 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		
 		return convertDomainToDto(userDao.save(toUpdate));
 	}
-	
+
 }

@@ -10,5 +10,9 @@ import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
 @Repository
 public interface IWorkDAO extends CrudRepository<WorkDomain,Integer> {
 
+
+
+	public Page<WorkDomain> findByName(String name, Pageable pageable);
+
 	public Page<WorkDomain> findAll(Pageable pageable);
 }

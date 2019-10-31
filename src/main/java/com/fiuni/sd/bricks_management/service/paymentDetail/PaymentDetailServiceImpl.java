@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fiuni.sd.bricks_management.dao.payment.IPaymentDAO;
+import com.fiuni.sd.bricks_management.dao.paymentConcept.IPaymentConceptDao;
 import com.fiuni.sd.bricks_management.dao.paymentDetail.IPaymentDetailDao;
-import com.fiuni.sd.bricks_management.dao.paymetConcept.IPaymentConceptDao;
 import com.fiuni.sd.bricks_management.domain.paymentDetail.PaymentDetailDomain;
 import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailResult;

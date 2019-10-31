@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiuni.sd.bricks_management.dto.personalDebt.PersonalDebtDTO;
@@ -33,6 +34,12 @@ public class PersonalDebtResource {
 	@GetMapping("/page/{page_num}")
 	public PersonalDebtResult getPersonalDebts(@PathVariable(value = "page_num") Integer pageNum) {
 		return personalDebtService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
+	}
+	
+	@GetMapping(path = "/page/{page_num}/search")
+	public PersonalDebtResult searchPersonalDebts(@PathVariable(value = "page_num") Integer pageNum,
+			@RequestParam(value = "description", required = false) String description) {
+		return personalDebtService.getByDescription(description, PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
 	
 	@PostMapping

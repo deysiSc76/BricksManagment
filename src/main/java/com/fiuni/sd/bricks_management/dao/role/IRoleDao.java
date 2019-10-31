@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.fiuni.sd.bricks_management.domain.role.RoleDomain;;
 
 @Repository
-public interface IRoleDao extends CrudRepository<RoleDomain, Integer> {
+public interface IRoleDAO extends CrudRepository<RoleDomain, Integer> {
 	
 }

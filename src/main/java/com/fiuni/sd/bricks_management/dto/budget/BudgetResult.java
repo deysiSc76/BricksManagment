@@ -16,7 +16,7 @@ public class BudgetResult extends BaseResult<BudgetDTO>{
 		return getList();
 	}
 	
-	public void setCharges(List<BudgetDTO> dtos) {
+	public void setBudgets(List<BudgetDTO> dtos) {
 		super.setList(dtos);
 	}
 }

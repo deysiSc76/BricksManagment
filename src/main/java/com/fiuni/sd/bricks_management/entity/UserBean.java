@@ -8,7 +8,9 @@ public class UserBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String name;
+	private String last_name;
 	private int number;
+	private String document;
 	private String address;
 	private String comment;
 	private String email;
@@ -29,11 +31,23 @@ public class UserBean implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getLastName() {
+		return last_name;
+	}
+	public void setLastName(String last_name) {
+		this.last_name = last_name;
+	}
 	public int getNumber() {
 		return number;
 	}
 	public void setNumber(int number) {
 		this.number = number;
+	}
+	public String getDocument() {
+		return document;
+	}
+	public void setDocument(String document) {
+		this.document = document;
 	}
 	public String getAddress() {
 		return address;

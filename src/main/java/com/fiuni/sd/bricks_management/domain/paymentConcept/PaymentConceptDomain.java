@@ -78,6 +78,7 @@ public class PaymentConceptDomain implements BaseDomain {
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
+	
 
 	public String getDescription() {
 		return description;

@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserResult;
 import com.fiuni.sd.bricks_management.service.user.IUserService;
 import com.fiuni.sd.bricks_management.utils.Setting;
+
 
 @RestController
 @RequestMapping("/users")
@@ -28,6 +30,27 @@ public class UserController {
 	@GetMapping("/{id}")
 	public UserDTO getById(@PathVariable(value = "id") Integer userId) {
 		return userService.getById(userId);
+	}
+	
+	@GetMapping(path = "/page/{page_num}/search")
+	public UserResult searchUsers(@PathVariable(value = "page_num") Integer pageNum,
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "lastName", required = false) String lastName,
+			@RequestParam(value = "document", required = false) String document) {
+		if (name != null) {
+			if (lastName == null) {
+				return userService.getByName(name, PageRequest.of(pageNum, Setting.PAGE_SIZE));
+			}
+			else if (lastName != null) {
+				return userService.getByNameAndLastName(name, lastName, PageRequest.of(pageNum, Setting.PAGE_SIZE));
+			}
+		}
+		else if (name == null) {
+			if (lastName != null) {
+				return userService.getByLastName(lastName, PageRequest.of(pageNum, Setting.PAGE_SIZE));
+			}
+		}
+		return userService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
 	
 	@GetMapping(path = "/page/{page_num}")
