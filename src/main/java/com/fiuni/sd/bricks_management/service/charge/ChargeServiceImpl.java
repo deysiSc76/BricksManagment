@@ -103,4 +103,14 @@ public class ChargeServiceImpl extends BaseServiceImpl<ChargeDTO, ChargeDomain, 
 		domain.setId(dto.getId());
 		return domain;
 	}
+	@Override
+	public ChargeResult getByDate(String date, Pageable pageable) {
+		final List<ChargeDTO> charges = new ArrayList<>();
+		Page<ChargeDomain> results = chargeDAO.findByDate(date, pageable);
+		results.forEach(charge -> charges.add(convertDomainToDto(charge)));
+		
+		final ChargeResult chargeResult = new ChargeResult();
+		chargeResult.setCharges(charges);
+		return chargeResult;
+	}
 }

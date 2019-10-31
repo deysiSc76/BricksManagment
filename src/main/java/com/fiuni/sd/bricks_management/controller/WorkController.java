@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -34,6 +35,15 @@ public class WorkController {
 	
 	@GetMapping(path = "/page/{page_num}")
 	public WorkResult getWorks(@PathVariable(value = "page_num") Integer pageNum) {
+		return workService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
+	}
+	
+	@GetMapping(path = "/page/{page_num}/search")
+	public WorkResult searchWorks(@PathVariable(value = "page_num") Integer pageNum,
+								  @RequestParam(value = "name") String name) {
+		if (name != null) {
+			return workService.getByName(name, PageRequest.of(pageNum, Setting.PAGE_SIZE));
+		}
 		return workService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
 

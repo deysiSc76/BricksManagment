@@ -27,7 +27,7 @@ public class ProviderDomain implements BaseDomain {
 	private Integer id;
 	
 	@Column(name = "bussiness_name")
-	private String bussiness_name;
+	private String bussinessName;
 	
 	@Column(name = "number")
 	private int number;
@@ -53,11 +53,11 @@ public class ProviderDomain implements BaseDomain {
 	}
 
 	public String getBussinessName() {
-		return bussiness_name;
+		return bussinessName;
 	}
 
-	public void setBussinessName(String bussiness_name) {
-		this.bussiness_name = bussiness_name;
+	public void setBussinessName(String bussinessName) {
+		this.bussinessName = bussinessName;
 	}
 
 	public int getNumber() {
@@ -102,7 +102,7 @@ public class ProviderDomain implements BaseDomain {
 
 	@Override
 	public String toString() {
-		return "ProviderDomain [id=" + id + ", businessName=" + bussiness_name + ", number=" + number + ", address="
+		return "ProviderDomain [id=" + id + ", businessName=" + bussinessName + ", number=" + number + ", address="
 				+ address + ", ruc=" + ruc + ", _paymentConcepts=" + payment_concepts + ", _payments=" + payments
 				+ "]";
 	}

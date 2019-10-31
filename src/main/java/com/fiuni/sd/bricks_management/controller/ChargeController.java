@@ -42,4 +42,12 @@ public class ChargeController {
 	public ChargeResult getAll(@PathVariable(value = "page_num") Integer pageNum) {
 		return chargeService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
+	@GetMapping(path = "/page/{page_num}/search")
+	public ChargeResult searchCharges(@PathVariable(value = "page_num") Integer pageNum,
+									  @RequestParam(value = "date", required = false) String date) {
+		if (date != null) {
+			return chargeService.getByDate(date, PageRequest.of(pageNum, Setting.PAGE_SIZE));
+		}
+		return chargeService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
+	}
 }

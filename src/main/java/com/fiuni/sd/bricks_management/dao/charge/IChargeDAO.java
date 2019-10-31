@@ -8,5 +8,8 @@ import com.fiuni.sd.bricks_management.domain.charge.ChargeDomain;
 
 @Repository
 public interface IChargeDAO extends CrudRepository<ChargeDomain, Integer> {
+	
 	public Page<ChargeDomain> findAll(Pageable pageable);
+	
+	public Page<ChargeDomain> findByDate(String date, Pageable pageable);
 }

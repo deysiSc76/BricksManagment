@@ -12,18 +12,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiuni.sd.bricks_management.dto.provider.ProviderDTO;
 import com.fiuni.sd.bricks_management.dto.provider.ProviderResult;
-import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.service.provider.IProviderService;
 import com.fiuni.sd.bricks_management.utils.Setting;
 
 @RestController
 @RequestMapping("/providers")
-public class ProviderResource {
+public class ProviderController {
+	
 	@Autowired
 	private IProviderService providerService;
 	
@@ -37,7 +38,27 @@ public class ProviderResource {
 	}
 	
 	@GetMapping(path = "/page/{page_num}")
-	public ProviderResult getProviders(@PathVariable(value = "page_num")Integer pageNum) {
+	public ProviderResult getProviders(@PathVariable(value = "page_num") Integer pageNum) {
+		return providerService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
+	}
+	
+	@GetMapping(path = "/page/{page_num}/search")
+	public ProviderResult searchProviders(@PathVariable(value = "page_num")Integer pageNum,
+									   @RequestParam(value = "bussiness-name", required = false) String bussinessName,
+									   @RequestParam(value = "ruc", required = false) String ruc) {
+		if (bussinessName != null) {
+			if (ruc == null) {
+				return providerService.getByBussinessName(bussinessName, PageRequest.of(pageNum, Setting.PAGE_SIZE));
+			}
+			else if (ruc != null) {
+				return providerService.getByBussinessNameAndRuc(bussinessName, ruc, PageRequest.of(pageNum, Setting.PAGE_SIZE));
+			}
+		}
+		else if (bussinessName == null) {
+			if (ruc != null) {
+				return providerService.getByRuc(ruc, PageRequest.of(pageNum, Setting.PAGE_SIZE));
+			}
+		}
 		return providerService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
 	

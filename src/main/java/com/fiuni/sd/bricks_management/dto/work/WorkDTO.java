@@ -1,15 +1,13 @@
 package com.fiuni.sd.bricks_management.dto.work;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
 
 @XmlRootElement(name = "work")
-
 public class WorkDTO extends BaseDTO{
+	
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String description;
