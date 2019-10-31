@@ -31,26 +31,26 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 		final WorkDomain work = workDao.save(workDomain);
 		return convertDomainToDto(work);
 	}
-	
+
 	@Override
 	@Transactional
 	public WorkDTO getById(Integer id) {
 		final WorkDomain workDomain = workDao.findById(id).orElse(null);
 		return workDomain == null ? null :  convertDomainToDto(workDomain);
 	}
-	
+
 	@Override
 	@Transactional
 	public WorkResult getAll(Pageable pageable) {
 		final List<WorkDTO> works = new ArrayList<>();
 		Page<WorkDomain> results= workDao.findAll(pageable);
 		results.forEach(work->works.add(convertDomainToDto(work)));
-		
+
 		final WorkResult workResult = new WorkResult();
 		workResult.setList(works);
 		return workResult;
 	}
-	
+
 	protected WorkDTO convertDomainToDto(WorkDomain domain) {
 		final WorkDTO work = new WorkDTO();
 		work.setId(domain.getId());
@@ -81,7 +81,7 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 	@Override
 	public void delete(Integer workId) {
 		workDao.deleteById(workId);
-		
+
 	}
 	@Override
 	public WorkDTO update(Integer id, WorkDTO work) {
@@ -95,9 +95,9 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 		toUpdate.setPersonManager(newWork.getPersonManager());
 		toUpdate.setStartDate(newWork.getStartDate());
 		toUpdate.setEndDate(newWork.getEndDate());
-		
+
 		workDao.save(toUpdate);
-		
+
 		return convertDomainToDto(toUpdate);
 	}
 
@@ -106,10 +106,10 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 		final List<WorkDTO> works = new ArrayList<>();
 		Page<WorkDomain> results = workDao.findByName(name, pageable);
 		results.forEach(work -> works.add(convertDomainToDto(work)));
-		
+
 		final WorkResult workResult = new WorkResult();
 		workResult.setWorks(works);
-		
+
 		return workResult;
 	}
 

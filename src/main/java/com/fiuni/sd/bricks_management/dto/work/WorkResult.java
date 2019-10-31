@@ -12,12 +12,12 @@ public class WorkResult extends BaseResult<WorkDTO>{
 	private static final long serialVersionUID = 1L;
 
 
-	
+
 	@XmlElement
 	public List<WorkDTO> getWorks() {
 		return getList();
 	}
-	
+
 	public void setWorks(List<WorkDTO> works) {
 		super.setList(works);
 	}
