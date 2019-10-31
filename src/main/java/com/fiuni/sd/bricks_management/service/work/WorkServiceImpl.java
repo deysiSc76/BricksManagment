@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.work;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 	@Transactional
 	public WorkResult getAll(Pageable pageable) {
 		final List<WorkDTO> works = new ArrayList<>();
-		Page<WorkDomain> results=workDao.findAll(pageable);
+		Page<WorkDomain> results= workDao.findAll(pageable);
 		results.forEach(work->works.add(convertDomainToDto(work)));
 		
 		final WorkResult workResult = new WorkResult();
@@ -99,6 +99,18 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 		workDao.save(toUpdate);
 		
 		return convertDomainToDto(toUpdate);
+	}
+
+	@Override
+	public WorkResult getByName(String name, Pageable pageable) {
+		final List<WorkDTO> works = new ArrayList<>();
+		Page<WorkDomain> results = workDao.findByName(name, pageable);
+		results.forEach(work -> works.add(convertDomainToDto(work)));
+		
+		final WorkResult workResult = new WorkResult();
+		workResult.setWorks(works);
+		
+		return workResult;
 	}
 
 

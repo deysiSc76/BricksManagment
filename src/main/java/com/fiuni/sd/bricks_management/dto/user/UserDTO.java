@@ -13,7 +13,9 @@ public class UserDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
+	private String last_name;
 	private int number;
+	private String document;
 	private String address;
 	private String comentario;
 	private String email;
@@ -35,11 +37,25 @@ public class UserDTO extends BaseDTO {
 		this.name = name;
 	}
 	@XmlElement
+	public String getLastName() {
+		return last_name;
+	}
+	public void setLastName(String last_name) {
+		this.last_name = last_name;
+	}
+	@XmlElement
 	public int getNumber() {
 		return number;
 	}
 	public void setNumber(int number) {
 		this.number = number;
+	}
+	@XmlElement
+	public String getDocument() {
+		return document;
+	}
+	public void setDocument(String document) {
+		this.document = document;
 	}
 	@XmlElement
 	public String getAddress() {

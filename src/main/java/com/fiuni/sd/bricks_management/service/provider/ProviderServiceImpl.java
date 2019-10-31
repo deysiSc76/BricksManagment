@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.provider;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +42,44 @@ public class ProviderServiceImpl extends BaseServiceImpl<ProviderDTO, ProviderDo
 	public ProviderResult getAll(Pageable pageable) {
 		final List<ProviderDTO> providers = new ArrayList<>();
 		Page<ProviderDomain> results=providerDao.findAll(pageable);
+		results.forEach(provider -> providers.add(convertDomainToDto(provider)));
+
+		final ProviderResult providerResult = new ProviderResult();
+		providerResult.setList(providers);
+		return providerResult;
+	}
+
+	@Override
+	@Transactional
+	public ProviderResult getByBussinessName(String bussinessName, Pageable pageable) {
+		final List<ProviderDTO> providers = new ArrayList<>();
+		Page<ProviderDomain> results=providerDao.findByBussinessName(bussinessName, pageable);
+		results.forEach(provider -> providers.add(convertDomainToDto(provider)));
+
+		final ProviderResult providerResult = new ProviderResult();
+		providerResult.setList(providers);
+		return providerResult;
+	}
+
+	@Override
+	@Transactional
+	public ProviderResult getByRuc(String ruc, Pageable pageable) {
+		final List<ProviderDTO> providers = new ArrayList<>();
+		Page<ProviderDomain> results=providerDao.findByRuc(ruc, pageable);
+		results.forEach(provider -> providers.add(convertDomainToDto(provider)));
+
+		final ProviderResult providerResult = new ProviderResult();
+		providerResult.setList(providers);
+		return providerResult;
+	}
+
+	@Override
+	@Transactional
+	public ProviderResult getByBussinessNameAndRuc(String bussinessName, String ruc, Pageable pageable) {
+		final List<ProviderDTO> providers = new ArrayList<>();
+		Page<ProviderDomain> results=providerDao.findByBussinessNameAndRuc(bussinessName, ruc, pageable);
 		results.forEach(provider->providers.add(convertDomainToDto(provider)));
-		
+
 		final ProviderResult providerResult = new ProviderResult();
 		providerResult.setList(providers);
 		return providerResult;
@@ -76,5 +112,4 @@ public class ProviderServiceImpl extends BaseServiceImpl<ProviderDTO, ProviderDo
 		providerDao.deleteById(providerId);
 	}
 
-	
 }

@@ -37,9 +37,15 @@ public class UserDomain implements BaseDomain{
 	@Column(name = "name")
 	private String name;
 
+	@Column(name = "last_name")
+	private String lastName;
+	
 	@Column(name = "number")
 	private int number;
 
+	@Column(name = "document")
+	private String document;
+	
 	@Column(name = "address")
 	private String address;
 
@@ -89,6 +95,14 @@ public class UserDomain implements BaseDomain{
 		this.name = name;
 	}
 
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
 	public int getNumber() {
 		return number;
 	}
@@ -97,6 +111,14 @@ public class UserDomain implements BaseDomain{
 		this.number = number;
 	}
 
+	public String getDocument() {
+		return document;
+	}
+	
+	public void setDocument(String document) {
+		this.document = document;
+	}
+	
 	public String getAddress() {
 		return address;
 	}
@@ -165,10 +187,10 @@ public class UserDomain implements BaseDomain{
 
 	@Override
 	public String toString() {
-		return "PersonDomain [id=" + id + ", name=" + name + ", number=" + number + ", address=" + address
-				+ ", comment=" + comment + ", email=" + email + ", password=" + password + ", personal_debt="
-				+ personal_debt + ", roles=" + roles + ", user_works=" + user_works + ", client_works="
-				+ client_works + ", client_charges=" + client_charges + "]";
+		return "UserDomain [id=" + id + ", name=" + name + ", lastName=" + lastName + ", number=" + number
+				+ ", document=" + document + ", address=" + address + ", comment=" + comment + ", email=" + email
+				+ ", password=" + password + ", personal_debt=" + personal_debt + ", roles=" + roles + ", user_works="
+				+ user_works + ", client_works=" + client_works + ", client_charges=" + client_charges + "]";
 	}
 
 	// *****************************************************************************************************************

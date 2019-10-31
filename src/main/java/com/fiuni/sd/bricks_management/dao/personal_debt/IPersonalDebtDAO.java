@@ -10,4 +10,6 @@ public interface IPersonalDebtDAO extends CrudRepository<PersonalDebtDomain, Int
 
 	public Page<PersonalDebtDomain> findAll(Pageable pageable);
 	
+	public Page<PersonalDebtDomain> findByDescription(String description, Pageable pageable);
+	
 }

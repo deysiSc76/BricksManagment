@@ -7,7 +7,7 @@ public class ProviderBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String business_name;
+	private String bussiness_name;
 	private int number;
 	private String address;
 	private String ruc;
@@ -18,11 +18,11 @@ public class ProviderBean implements Serializable{
 	
 	// GETTERS & SETTERS
 	
-	public String getBusinessName() {
-		return business_name;
+	public String getBussinessName() {
+		return bussiness_name;
 	}
-	public void setBusinessName(String business_name) {
-		this.business_name = business_name;
+	public void setBussinessName(String bussiness_name) {
+		this.bussiness_name = bussiness_name;
 	}
 	public int getNumber() {
 		return number;

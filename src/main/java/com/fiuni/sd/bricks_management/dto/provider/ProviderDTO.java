@@ -8,18 +8,18 @@ import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
 @XmlRootElement(name = "provider")
 public class ProviderDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
-	String businessName;
-	int number;
-	String address;
-	String ruc;
+	private String bussinessName;
+	private int number;
+	private String address;
+	private String ruc;
 	
 	@XmlElement
 	public String getBusinessName() {
-		return businessName;
+		return bussinessName;
 	}
 	
-	public void setBusinessName(String businessName) {
-		this.businessName = businessName;
+	public void setBusinessName(String bussinessName) {
+		this.bussinessName = bussinessName;
 	}
 	@XmlElement
 	public int getNumber() {
@@ -44,7 +44,7 @@ public class ProviderDTO extends BaseDTO {
 	}
 	@Override
 	public String toString() {
-		return "ProviderDTO [businessName=" + businessName + ", number=" + number + ", address=" + address
+		return "ProviderDTO [bussinessName=" + bussinessName + ", number=" + number + ", address=" + address
 				+ ", ruc=" + ruc + "]";
 	}
 	
