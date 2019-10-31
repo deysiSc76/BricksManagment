@@ -19,7 +19,6 @@ import com.fiuni.sd.bricks_management.domain.base.BaseDomain;
 import com.fiuni.sd.bricks_management.domain.budget.BudgetDomain;
 import com.fiuni.sd.bricks_management.domain.payment.PaymentDomain;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
-import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
 
 @Entity
 @Table(name = "works")

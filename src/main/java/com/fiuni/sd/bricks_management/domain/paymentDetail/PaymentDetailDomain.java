@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.domain.paymentDetail;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;

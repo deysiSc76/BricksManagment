@@ -13,36 +13,39 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fiuni.sd.bricks_management.dto.payment.FullPaymentDTO;
 import com.fiuni.sd.bricks_management.dto.payment.PaymentDTO;
+import com.fiuni.sd.bricks_management.dto.paymentConcept.FullPaymentConceptDTO;
+import com.fiuni.sd.bricks_management.dto.paymentConcept.PaymentConceptDTO;
 import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 import com.fiuni.sd.bricks_management.service.payment.IPaymentService;
+import com.fiuni.sd.bricks_management.service.paymentConcept.IPaymentConceptService;
 import com.fiuni.sd.bricks_management.service.paymentDetail.IPaymentDetailService;
 
 @RestController
-@RequestMapping("/payments")
-public class PaymentController {
+@RequestMapping("/paymentConcepts")
+public class PaymentConcept {
 	@Autowired
-	private IPaymentService paymentService;
+	private IPaymentConceptService paymentConceptService;
 	@Autowired
 	private IPaymentDetailService paymentDetailService;
 	
 	@PostMapping()
-	public FullPaymentDTO save(@Valid @RequestBody FullPaymentDTO dto) {
-		return paymentService.save(dto);
+	public FullPaymentConceptDTO save(@Valid @RequestBody FullPaymentConceptDTO dto) {
+		return paymentConceptService.save(dto);
 	}
 	
 	@PutMapping("/{id}")
-	public FullPaymentDTO update(@PathVariable(value = "id") Integer id, @Valid @RequestBody FullPaymentDTO dto) {
+	public FullPaymentConceptDTO update(@PathVariable(value = "id") Integer id, @Valid @RequestBody FullPaymentConceptDTO dto) {
 		for(PaymentDetailDTO detail : paymentDetailService.getByPaymentId(id).getList()){
 			if(!dto.getDetails().contains(detail)) {
 				paymentDetailService.delete(detail);
 			}
 		}
-		return paymentService.save(dto);
+		return paymentConceptService.save(dto);
 	}
 	
 	@GetMapping("/{id}")
-	public PaymentDTO getById(@PathVariable(value = "id") Integer id) {
-		return paymentService.getById(id);
+	public PaymentConceptDTO getById(@PathVariable(value = "id") Integer id) {
+		return paymentConceptService.getById(id);
 	};
 
 }

@@ -9,13 +9,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fiuni.sd.bricks_management.dto.user.UserDTO;
-import com.fiuni.sd.bricks_management.dto.user.UserResult;
-import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
-import com.fiuni.sd.bricks_management.dao.role.IRoleDAO;
+import com.fiuni.sd.bricks_management.dao.role.IRoleDao;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.domain.role.RoleDomain;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
+import com.fiuni.sd.bricks_management.dto.user.UserDTO;
+import com.fiuni.sd.bricks_management.dto.user.UserResult;
+import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserResult> 
@@ -24,7 +24,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Autowired
 	private IUserDAO userDao;
 	@Autowired
-	private IRoleDAO roleDao;
+	private IRoleDao roleDao;
 	
 	@Override
 	@Transactional

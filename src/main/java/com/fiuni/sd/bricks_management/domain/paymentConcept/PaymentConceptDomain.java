@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.domain.paymentConcept;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -110,13 +110,20 @@ public class PaymentConceptDomain implements BaseDomain {
 	public void set_paymentDetails(List<PaymentDetailDomain> payment_details) {
 		this.payment_details = payment_details;
 	}
+	public BudgetConceptDomain get_budgetConceptDetails() {
+		return budget_concept;
+	}
+
+	public void set_budgetConcepts(BudgetConceptDomain payment_concept) {
+		this.budget_concept = payment_concept;
+	}
 	
 	// *****************************************************************************************************************
 	
 	@Override
 	public String toString() {
 		return "PaymentConceptDomain [id=" + id + ", name=" + name + ", cost=" + cost + ", description=" + description
-				+ ", material=" + material + ", _provider=" + provider + ", _paymentDetails=" + payment_details + "]";
+				+ ", material=" + "_budgetConcet"+ budget_concept + material + ", _provider=" + provider + ", _paymentDetails=" + payment_details + "]";
 	}
 	
 	// *****************************************************************************************************************

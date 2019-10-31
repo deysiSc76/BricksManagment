@@ -1,0 +1,43 @@
+<project name="bricksManagement" basedir=".">
+	<property name="src.dir" value="src" />
+	<property name="build.dir" value="build" />
+	<property name="clases.dir" value="${build.dir}/clases" />
+	<property name="jar.dir" value="${build.dir}/jar" />
+	<property name="lib.dir" value="lib" />
+
+	<!--Path of all jar-->
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="*.jar"/>
+	</path>
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+	<target name="init">
+		<echo>Creando carpetas</echo>
+		<mkdir dir="${clases.dir}"/>
+		<mkdir dir="${jar.dir}"/>
+	</target>
+
+
+	<!--Compile all java file-->
+	<target name="java-compile" depends="init" description="Compile java classes">
+		<echo>compiling Tarea2 class</echo>
+		<javac classpathref="classpath" debug="true" destdir="${clases.dir}" srcdir="${src.dir}/main/java/com/fiuni/sd/bricks_management/dto" encoding="cp1252" includeantruntime="false">
+			<compilerarg line="-Xlint -Xlint:-unchecked" />
+		</javac>
+	</target>
+
+
+	<target name="make-jar" depends="clean, java-compile" description="Creating the jar">
+		<echo>Creating jar</echo>
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${clases.dir}">
+			 <!-- basedir="${clases.dir}" -->
+			<!-- <fileset>
+				<include name="${src.dir}/main/java/com/fiuni/sd/bricks_management/dto" />
+			</fileset> -->
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}"/>
+			</manifest>
+		</jar>
+	</target>
+</project>

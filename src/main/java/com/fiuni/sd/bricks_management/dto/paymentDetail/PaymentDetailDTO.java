@@ -1,14 +1,11 @@
 package com.fiuni.sd.bricks_management.dto.paymentDetail;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
 
 @XmlRootElement(name = "paymentDetail")
-public class PaymentDetailDTO extends BaseDTO {
-	
+public class PaymentDetailDTO extends BaseDTO {	
 	private static final long serialVersionUID = 1L;
 	
 	private int unitPrice;
@@ -54,6 +51,13 @@ public class PaymentDetailDTO extends BaseDTO {
 		}
 		return false;
 	}
+	@Override
+	public int hashCode() {final int prime = 31;
+	 int result = 1;
+	 result = prime * result + getId();
+	 return result;
+	}
+	
 	
 
 }

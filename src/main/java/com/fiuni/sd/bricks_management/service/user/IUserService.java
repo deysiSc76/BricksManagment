@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.user;
 
-import com.fiuni.sd.bricks_management.dto.user.UserDTO; 
+import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserResult;
 import com.fiuni.sd.bricks_management.service.base.IBaseService;
 

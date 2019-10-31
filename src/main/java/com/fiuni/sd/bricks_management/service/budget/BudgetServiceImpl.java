@@ -10,17 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fiuni.sd.bricks_management.dao.budget.IBudgetDAO;
 import com.fiuni.sd.bricks_management.dao.budgetConcept.IBudgetConceptDAO;
-import com.fiuni.sd.bricks_management.dao.budgetDetail.IBudgetDetailDAO;
 import com.fiuni.sd.bricks_management.dao.work.IWorkDAO;
 import com.fiuni.sd.bricks_management.domain.budget.BudgetDomain;
 import com.fiuni.sd.bricks_management.domain.budgetDetail.BudgetDetailDomain;
-import com.fiuni.sd.bricks_management.domain.charge.ChargeDomain;
 import com.fiuni.sd.bricks_management.dto.budget.BudgetDTO;
 import com.fiuni.sd.bricks_management.dto.budget.BudgetResult;
+import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailDTO;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
 import com.fiuni.sd.bricks_management.service.charge.ChargeServiceImpl;
-import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailDTO;
-import com.fiuni.sd.bricks_management.dto.charge.ChargeDTO;
 
 @Service
 public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,BudgetResult>

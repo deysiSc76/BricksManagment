@@ -10,9 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.dao.budget.IBudgetDAO;
 import com.fiuni.sd.bricks_management.dao.charge.IChargeDAO;
+import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.domain.charge.ChargeDomain;
 import com.fiuni.sd.bricks_management.dto.charge.ChargeDTO;
 import com.fiuni.sd.bricks_management.dto.charge.ChargeResult;

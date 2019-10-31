@@ -1,6 +1,7 @@
 package com.fiuni.sd.bricks_management.dto.base;
 
 import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlElement;
 
 public abstract class BaseDTO implements Serializable {

@@ -16,7 +16,6 @@ import com.fiuni.sd.bricks_management.domain.paymentDetail.PaymentDetailDomain;
 import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
-import com.fiuni.sd.bricks_management.service.payment.IPaymentService;
 
 @Service
 public class PaymentDetailServiceImpl  extends BaseServiceImpl<PaymentDetailDTO, PaymentDetailDomain, PaymentDetailResult>

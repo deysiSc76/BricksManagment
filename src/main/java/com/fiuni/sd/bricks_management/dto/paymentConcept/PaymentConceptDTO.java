@@ -1,7 +1,5 @@
 package com.fiuni.sd.bricks_management.dto.paymentConcept;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 

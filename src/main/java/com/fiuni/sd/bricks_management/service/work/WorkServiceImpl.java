@@ -10,19 +10,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fiuni.sd.bricks_management.dao.budget.IBudgetDAO;
-
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
-import com.fiuni.sd.bricks_management.dao.work.IWorkDao;
-import com.fiuni.sd.bricks_management.domain.user.UserDomain;
+import com.fiuni.sd.bricks_management.dao.work.IWorkDAO;
 import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
-import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.work.WorkDTO;
 import com.fiuni.sd.bricks_management.dto.work.WorkResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
 @Service
 public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkResult> implements IWorkService{
 	@Autowired
-	private IWorkDao workDao;
+	private IWorkDAO workDao;
 	@Autowired
 	private IUserDAO clientDao;
 	@Autowired
@@ -96,7 +93,6 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 		toUpdate.setDescription(newWork.getDescription());
 		toUpdate.setClient(newWork.getClient());
 		toUpdate.setPersonManager(newWork.getPersonManager());
-		toUpdate.setPayments(newWork.getPayments());
 		toUpdate.setStartDate(newWork.getStartDate());
 		toUpdate.setEndDate(newWork.getEndDate());
 		

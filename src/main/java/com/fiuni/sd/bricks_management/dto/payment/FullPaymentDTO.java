@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fiuni.sd.bricks_management.dto.base.BaseResult;
 import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 
 @XmlRootElement(name = "payment")

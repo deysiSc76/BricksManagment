@@ -1,7 +1,6 @@
 package com.fiuni.sd.bricks_management.service.provider;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fiuni.sd.bricks_management.dto.provider.ProviderDTO;
 import com.fiuni.sd.bricks_management.dao.providers.IProviderDao;
 import com.fiuni.sd.bricks_management.domain.provider.ProviderDomain;
+import com.fiuni.sd.bricks_management.dto.provider.ProviderDTO;
 import com.fiuni.sd.bricks_management.dto.provider.ProviderResult;
-import com.fiuni.sd.bricks_management.entity.ProviderBean;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
 
 @Service

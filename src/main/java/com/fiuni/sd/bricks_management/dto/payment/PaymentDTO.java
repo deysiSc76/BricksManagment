@@ -1,14 +1,10 @@
 package com.fiuni.sd.bricks_management.dto.payment;
 
-import java.io.Serializable;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fiuni.sd.bricks_management.domain.paymentDetail.PaymentDetailDomain;
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
-import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 
 @XmlRootElement(name = "payment")
 public class PaymentDTO extends BaseDTO{

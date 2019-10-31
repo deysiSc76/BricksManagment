@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fiuni.sd.bricks_management.dto.provider.ProviderDTO;
 import com.fiuni.sd.bricks_management.dto.provider.ProviderResult;
-import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.service.provider.IProviderService;
 import com.fiuni.sd.bricks_management.utils.Setting;
 
