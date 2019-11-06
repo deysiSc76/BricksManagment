@@ -13,6 +13,7 @@ import com.fiuni.sd.bricks_management.dao.role.IRoleDAO;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.domain.role.RoleDomain;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
+import com.fiuni.sd.bricks_management.dto.rol.RolDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
@@ -98,6 +99,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Override
 	protected UserDTO convertDomainToDto(UserDomain domain) {
 		final UserDTO dto = new UserDTO();
+		
 		dto.setId(domain.getId());
 		dto.setAddress(domain.getAddress());
 		dto.setComentario(domain.getComment());
@@ -107,11 +109,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		dto.setLastName(domain.getLastName());
 		dto.setNumber(domain.getNumber());
 		dto.setPassword(domain.getPassword());
-		
-		final List<Integer> roles_id = new ArrayList<>();
-		final List<RoleDomain> user_roles = domain.getRoles();
-		user_roles.forEach(user_role -> roles_id.add(user_role.getId()));
-		dto.setRoles(roles_id);
+		dto.setRoles(convertToRolDtoList(domain.getRoles()));
 		
 		return dto;
 	}
@@ -128,11 +126,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		domain.setName(dto.getName());
 		domain.setNumber(dto.getNumber());
 		domain.setPassword(dto.getPassword());
-		
-		final List<RoleDomain> roles = new ArrayList<>();
-		final List<Integer> roles_id = dto.getRoles();
-		roles_id.forEach(id -> roles.add(roleDao.findById(id).get()));
-		domain.setRoles(roles);
+		domain.setRoles(convertToRolDomainList(dto.getRoles()));
 		
 		return domain;
 	}
@@ -157,4 +151,33 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		return convertDomainToDto(userDao.save(toUpdate));
 	}
 
+	private RolDTO convertToRoleDto(RoleDomain domain) {
+		final RolDTO dto = new RolDTO();
+		dto.setId(domain.getId());
+		dto.setType(domain.getType());
+		
+		return dto;
+	}
+	
+	private RoleDomain convertToRolDomain(RolDTO dto) {
+		final RoleDomain domain = new RoleDomain();
+		domain.setId(dto.getId());
+		domain.setType(dto.getType());
+		
+		return domain;
+	}
+	
+	private List<RolDTO> convertToRolDtoList(List<RoleDomain> domains) {
+		final List<RolDTO> dtos = new ArrayList<>();
+		domains.forEach(domain -> dtos.add(convertToRoleDto(domain)));
+		
+		return dtos;
+	}
+	
+	private List<RoleDomain> convertToRolDomainList(List<RolDTO> dtos) {
+		final List<RoleDomain> domains = new ArrayList<>();
+		dtos.forEach(dto -> domains.add(convertToRolDomain(dto)));
+		
+		return domains;
+	}
 }

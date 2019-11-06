@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.work;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fiuni.sd.bricks_management.dao.budget.IBudgetDAO;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
 import com.fiuni.sd.bricks_management.dao.work.IWorkDAO;
 import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
@@ -22,8 +21,6 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 	private IWorkDAO workDao;
 	@Autowired
 	private IUserDAO clientDao;
-	@Autowired
-	private IBudgetDAO budgetDao;
 	@Override
 	@Transactional
 	public WorkDTO save(WorkDTO dto) {
@@ -58,7 +55,6 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 		work.setAddress(domain.getAddress());
 		work.setDescription(domain.getDescription());
 		work.setClientId(domain.getClient().getId());
-		work.setBudgetId(domain.getBudget().getId());
 		work.setPersonnelManager(domain.getPersonManager());
 		work.setStartDate(domain.getStartDate());
 		work.setEnd_date(domain.getEndDate());
@@ -71,7 +67,6 @@ public class WorkServiceImpl extends BaseServiceImpl<WorkDTO, WorkDomain, WorkRe
 		work.setAddress(dto.getAddress());
 		work.setDescription(dto.getDescription());
 		work.setClient(clientDao.findById(dto.getClientId()).get());
-		work.setBudget(budgetDao.findById(dto.getBudgetId()).get());
 		work.setPersonManager(dto.getPersonnelManager());
 		work.setStartDate(dto.getStartDate());
 		work.setEndDate(dto.getEnd_date());

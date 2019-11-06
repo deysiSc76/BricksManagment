@@ -89,7 +89,7 @@ implements IPaymentDetailService {
 		dto.setUnitPrice(domain.getUnit_price());
 		dto.setQuantity(domain.getQuantity());
 		dto.setPaymentRelatedId(domain.getPayment_related().getId());
-		dto.setPaymentConcept(domain.getPayment_concept().getId());
+		dto.setPaymentConceptId(domain.getPayment_concept().getId());
 		dto.setPaymentId(domain.getPayment().getId());
 		return dto;
 	}

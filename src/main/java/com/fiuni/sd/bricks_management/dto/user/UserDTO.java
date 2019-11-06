@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
+import com.fiuni.sd.bricks_management.dto.rol.RolDTO;
 
 @XmlRootElement(name = "person")
 public class UserDTO extends BaseDTO {
@@ -20,8 +21,9 @@ public class UserDTO extends BaseDTO {
 	private String comentario;
 	private String email;
 	private String password;
-	private List<Integer> roles_id;
+	private List<RolDTO> roles;
 
+	
 	@XmlElement
 	public String getEmail() {
 		return email;
@@ -79,10 +81,10 @@ public class UserDTO extends BaseDTO {
 		this.password = password;
 	}
 	@XmlElement
-	public List<Integer> getRoles() {
-		return roles_id;
+	public List<RolDTO> getRoles() {
+		return roles;
 	}
-	public void setRoles(List<Integer> roles_id) {
-		this.roles_id = roles_id;
+	public void setRoles(List<RolDTO> roles) {
+		this.roles = roles;
 	}
 }

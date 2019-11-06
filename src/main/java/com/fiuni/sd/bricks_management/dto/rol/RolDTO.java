@@ -1,8 +1,8 @@
 package com.fiuni.sd.bricks_management.dto.rol;
 
-import java.io.Serializable;
+import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
 
-public class RolDTO implements Serializable{
+public class RolDTO extends BaseDTO {
 	
 	private static final long serialVersionUID = 1L;
 	private String type;
