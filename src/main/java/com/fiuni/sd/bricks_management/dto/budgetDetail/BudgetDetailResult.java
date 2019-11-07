@@ -12,11 +12,11 @@ public class BudgetDetailResult extends BaseResult<BudgetDetailDTO> {
 private static final long serialVersionUID = 1L;
 	
 	@XmlElement
-	public List<BudgetDetailDTO> getBudgets() {
+	public List<BudgetDetailDTO> getBudgetDetails() {
 		return getList();
 	}
 	
-	public void setCharges(List<BudgetDetailDTO> dtos) {
+	public void setBudgetDetails(List<BudgetDetailDTO> dtos) {
 		super.setList(dtos);
 	}
 }

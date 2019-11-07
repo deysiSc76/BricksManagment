@@ -3,6 +3,7 @@ package com.fiuni.sd.bricks_management.domain.work;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,8 +50,7 @@ public class WorkDomain implements BaseDomain {
 	@Column(name = "personal_manager")
 	private String personal_manager;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "budget_id")
+	@OneToOne(mappedBy = "work", cascade = CascadeType.ALL, orphanRemoval = true)
 	private BudgetDomain budget;
 
 	@ManyToOne(fetch = FetchType.LAZY)

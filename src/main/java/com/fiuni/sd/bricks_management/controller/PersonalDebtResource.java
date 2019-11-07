@@ -39,6 +39,10 @@ public class PersonalDebtResource {
 	@GetMapping(path = "/page/{page_num}/search")
 	public PersonalDebtResult searchPersonalDebts(@PathVariable(value = "page_num") Integer pageNum,
 			@RequestParam(value = "description", required = false) String description) {
+		
+		if (description == null) {
+			return personalDebtService.getAll(PageRequest.of(pageNum, Setting.PAGE_SIZE));
+		}
 		return personalDebtService.getByDescription(description, PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
 	

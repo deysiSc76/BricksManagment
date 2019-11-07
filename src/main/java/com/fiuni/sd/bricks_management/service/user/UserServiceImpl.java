@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.user;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fiuni.sd.bricks_management.dao.role.IRoleDAO;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
+import com.fiuni.sd.bricks_management.dao.work.IWorkDAO;
 import com.fiuni.sd.bricks_management.domain.role.RoleDomain;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
+import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
+import com.fiuni.sd.bricks_management.dto.rol.RolDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
@@ -24,7 +26,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Autowired
 	private IUserDAO userDao;
 	@Autowired
-	private IRoleDAO roleDao;
+	private IWorkDAO workDao;
 	
 	@Override
 	@Transactional
@@ -98,6 +100,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Override
 	protected UserDTO convertDomainToDto(UserDomain domain) {
 		final UserDTO dto = new UserDTO();
+		
 		dto.setId(domain.getId());
 		dto.setAddress(domain.getAddress());
 		dto.setComentario(domain.getComment());
@@ -107,11 +110,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		dto.setLastName(domain.getLastName());
 		dto.setNumber(domain.getNumber());
 		dto.setPassword(domain.getPassword());
+		dto.setRoles(convertToRolDtoList(domain.getRoles()));
 		
-		final List<Integer> roles_id = new ArrayList<>();
-		final List<RoleDomain> user_roles = domain.getRoles();
-		user_roles.forEach(user_role -> roles_id.add(user_role.getId()));
-		dto.setRoles(roles_id);
+		List<Integer> workIds = new ArrayList<>();
+		List<WorkDomain> works = domain.getUserWorks();
+		works.forEach(work -> workIds.add(work.getId()));
+		dto.setWorksId(workIds);
 		
 		return dto;
 	}
@@ -128,11 +132,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		domain.setName(dto.getName());
 		domain.setNumber(dto.getNumber());
 		domain.setPassword(dto.getPassword());
+		domain.setRoles(convertToRolDomainList(dto.getRoles()));
 		
-		final List<RoleDomain> roles = new ArrayList<>();
-		final List<Integer> roles_id = dto.getRoles();
-		roles_id.forEach(id -> roles.add(roleDao.findById(id).get()));
-		domain.setRoles(roles);
+		List<WorkDomain> works = new ArrayList<>();
+		List<Integer> workIds = dto.getWorksId();
+		workIds.forEach(id -> works.add(workDao.findById(id).get()));
+		domain.setUserWorks(works);
 		
 		return domain;
 	}
@@ -157,4 +162,33 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		return convertDomainToDto(userDao.save(toUpdate));
 	}
 
+	private RolDTO convertToRoleDto(RoleDomain domain) {
+		final RolDTO dto = new RolDTO();
+		dto.setId(domain.getId());
+		dto.setType(domain.getType());
+		
+		return dto;
+	}
+	
+	private RoleDomain convertToRolDomain(RolDTO dto) {
+		final RoleDomain domain = new RoleDomain();
+		domain.setId(dto.getId());
+		domain.setType(dto.getType());
+		
+		return domain;
+	}
+	
+	private List<RolDTO> convertToRolDtoList(List<RoleDomain> domains) {
+		final List<RolDTO> dtos = new ArrayList<>();
+		domains.forEach(domain -> dtos.add(convertToRoleDto(domain)));
+		
+		return dtos;
+	}
+	
+	private List<RoleDomain> convertToRolDomainList(List<RolDTO> dtos) {
+		final List<RoleDomain> domains = new ArrayList<>();
+		dtos.forEach(dto -> domains.add(convertToRolDomain(dto)));
+		
+		return domains;
+	}
 }

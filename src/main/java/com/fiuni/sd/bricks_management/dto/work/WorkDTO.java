@@ -16,7 +16,6 @@ public class WorkDTO extends BaseDTO{
 	private String startDate;
 	private String end_date;
 	private String personnelManager;
-	private int budgetId;
 	
 	@XmlElement
 	public String getName() {
@@ -67,14 +66,5 @@ public class WorkDTO extends BaseDTO{
 	public void setPersonnelManager(String personnelManager) {
 		this.personnelManager = personnelManager;
 	}
-	@XmlElement
-	public int getBudgetId() {
-		return budgetId;
-	}
-	public void setBudgetId(int budgetId) {
-		this.budgetId = budgetId;
-	}
-	
-	
 
 }

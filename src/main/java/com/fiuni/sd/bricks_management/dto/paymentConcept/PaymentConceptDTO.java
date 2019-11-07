@@ -1,9 +1,12 @@
 package com.fiuni.sd.bricks_management.dto.paymentConcept;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
+import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 
 @XmlRootElement(name = "paymentDetail")
 public class PaymentConceptDTO extends BaseDTO {
@@ -15,6 +18,7 @@ public class PaymentConceptDTO extends BaseDTO {
 	private boolean material;
 	private int budgetConceptId;
 	private int providerId;
+	private List<PaymentDetailDTO> paymentDetails;
 	
 	@XmlElement
 	public int getBudgetConceptId() {
@@ -56,6 +60,13 @@ public class PaymentConceptDTO extends BaseDTO {
 	}
 	public void setMaterial(boolean material) {
 		this.material = material;
+	}
+	@XmlElement
+	public List<PaymentDetailDTO> getPaymentDetails() {
+		return paymentDetails;
+	}
+	public void setPaymentDetails(List<PaymentDetailDTO> paymentDetails) {
+		this.paymentDetails = paymentDetails;
 	}
 	
 	

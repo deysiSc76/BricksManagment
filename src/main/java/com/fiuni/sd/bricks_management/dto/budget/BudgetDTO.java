@@ -9,7 +9,6 @@ import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
 import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailDTO;
 import com.fiuni.sd.bricks_management.dto.charge.ChargeDTO;
 
-
 @XmlRootElement(name = "budget")
 public class BudgetDTO extends BaseDTO{
 	
@@ -18,8 +17,12 @@ public class BudgetDTO extends BaseDTO{
 	private Integer totalAmount;
 	private Integer workId;
 	
-	private List<BudgetDetailDTO> detailDtos;
-	private List<ChargeDTO> chargeDtos;
+	private List<BudgetDetailDTO> details;
+	private List<ChargeDTO> charges;
+	
+	public void addDetail(BudgetDetailDTO detail) {
+		details.add(detail);
+	}
 	
 	@XmlElement
 	public Integer getTotalAmount() {
@@ -36,17 +39,17 @@ public class BudgetDTO extends BaseDTO{
 		this.workId = id;
 	}
 	@XmlElement
-	public List<BudgetDetailDTO> getDetailDtos(){
-		return detailDtos;
+	public List<BudgetDetailDTO> getDetails(){
+		return details;
 	}
-	public void setDetailDtos( List<BudgetDetailDTO> dtos ) {
-		this.detailDtos = dtos;
+	public void setDetails( List<BudgetDetailDTO> details ) {
+		this.details = details;
 	}
 	@XmlElement
-	public List<ChargeDTO> getChargeDtos(){
-		return chargeDtos;
+	public List<ChargeDTO> getCharges() {
+		return charges;
 	}
-	public void setChargeDtos( List<ChargeDTO> chargeDtos ) {
-		this.chargeDtos = chargeDtos;
+	public void setCharges(List<ChargeDTO> charges) {
+		this.charges = charges;
 	}
 }

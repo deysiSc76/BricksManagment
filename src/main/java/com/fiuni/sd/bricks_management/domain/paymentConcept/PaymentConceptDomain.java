@@ -111,12 +111,12 @@ public class PaymentConceptDomain implements BaseDomain {
 	public void set_paymentDetails(List<PaymentDetailDomain> payment_details) {
 		this.payment_details = payment_details;
 	}
-	public BudgetConceptDomain get_budgetConceptDetails() {
+	public BudgetConceptDomain get_budgetConcept() {
 		return budget_concept;
 	}
 
-	public void set_budgetConcepts(BudgetConceptDomain payment_concept) {
-		this.budget_concept = payment_concept;
+	public void set_budgetConcept(BudgetConceptDomain budget_concept) {
+		this.budget_concept = budget_concept;
 	}
 	
 	// *****************************************************************************************************************

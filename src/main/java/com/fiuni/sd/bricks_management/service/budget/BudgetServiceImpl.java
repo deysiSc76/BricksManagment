@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.budget;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fiuni.sd.bricks_management.dao.budget.IBudgetDAO;
 import com.fiuni.sd.bricks_management.dao.budgetConcept.IBudgetConceptDAO;
+import com.fiuni.sd.bricks_management.dao.budgetDetail.IBudgetDetailDAO;
 import com.fiuni.sd.bricks_management.dao.work.IWorkDAO;
 import com.fiuni.sd.bricks_management.domain.budget.BudgetDomain;
 import com.fiuni.sd.bricks_management.domain.budgetDetail.BudgetDetailDomain;
@@ -19,9 +20,6 @@ import com.fiuni.sd.bricks_management.dto.budget.BudgetResult;
 import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailDTO;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
 import com.fiuni.sd.bricks_management.service.charge.ChargeServiceImpl;
-import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailDTO;
-
-
 
 @Service
 public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,BudgetResult>
@@ -29,6 +27,8 @@ public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,Bu
 
 	@Autowired
 	private IBudgetDAO budgetDao;
+	@Autowired
+	private IBudgetDetailDAO budgetDetailDao;
 	@Autowired
 	private IWorkDAO workDao;
 	@Autowired
@@ -39,20 +39,63 @@ public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,Bu
 	@Override
 	@Transactional
 	public BudgetDTO save(BudgetDTO dto) {
-		final BudgetDomain budgetDomain = convertDtoToDomain(dto);
-		return convertDomainToDto(budgetDao.save(budgetDomain));
+		List<BudgetDetailDTO> detailsDto = dto.getDetails();
+		final BudgetDomain budget = convertDtoToDomain(dto);
+		budgetDao.save(budget);
+		
+		detailsDto.forEach(detail -> detail.setBudgetId(budget.getId()));
+		List<BudgetDetailDomain> detailsDomain = convertToDetailDomainList(detailsDto);
+		detailsDomain.forEach(detail -> budgetDetailDao.save(detail));
+		budget.setBudgetDetails(detailsDomain);
+		
+		return convertDomainToDto(budget);
 	}
-
+	
+	/*
+	 * Método para actualizar un presupuesto
+	 * Actualmente solo funciona para actualizar las cabeceras,
+	 * todavía no es posible actualizar la cabecera y los detalles de una vez 
+	 */
 
 	@Override
 	@Transactional
 	public BudgetDTO update(BudgetDTO dto, Integer budgetId) {
+		
+		/* arrayList para guardar los ids de cada detalle del dto
+		 * y asi tener un registro de los que ya se encuentran guardados
+		 * para posteriormente sobreescribirlos
+		*/
+		List<Integer> detailIds = new ArrayList<>();
+		
 		final BudgetDTO toUpdate = convertDomainToDto(budgetDao.findById(budgetId).get());
+		
+		// se agregan al arrayList los ids de cada detalle de un budget que se encuentra guardado
+		toUpdate.getDetails().forEach(detail -> detailIds.add(detail.getId()));
+		
 		toUpdate.setTotalAmount(dto.getTotalAmount());
 		toUpdate.setWorkId(dto.getWorkId());
-		toUpdate.setDetailDtos(dto.getDetailDtos());
-		toUpdate.setChargeDtos(dto.getChargeDtos());
+		// toUpdate.setDetails(updateDetails(dto.getDetails(), detailIds));
+		
 		return save(toUpdate);
+	}
+	
+	public List<BudgetDetailDTO> updateDetails(List<BudgetDetailDTO> details, List<Integer> detailIds) {
+		return null;
+	}
+	
+	
+	/*
+	 * Método para actualizar un detalle específico dado su id
+	 */
+	@Override
+	@Transactional
+	public BudgetDetailDTO updateDetail(Integer id, BudgetDetailDTO detail) {
+		final BudgetDetailDTO toUpdate = convertToDetailDto(budgetDetailDao.findById(id).get());
+		toUpdate.setAmount(detail.getAmount());
+		toUpdate.setBudgetConceptId(detail.getBudgetConceptId());
+		toUpdate.setQuantity(detail.getQuantity());
+		
+		return toUpdate;
 	}
 
 	@Override
@@ -71,7 +114,16 @@ public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,Bu
 		budgetResult.setBudgets(dtos);
 		return budgetResult;
 	}
-
+	
+	@Override
+	public void delete(Integer id) {
+		budgetDao.deleteById(id);
+	}
+	
+	@Override
+	public void deleteDetail(Integer id) {
+		budgetDetailDao.deleteById(id);
+	}
 
 	@Override
 	protected BudgetDTO convertDomainToDto(BudgetDomain domain) {
@@ -79,9 +131,10 @@ public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,Bu
 		dto.setId(domain.getId());
 		dto.setTotalAmount(domain.getTotalAmount());
 		dto.setWorkId(domain.getWork().getId());
-		dto.setDetailDtos(convertToDetailDtoList(domain.getBudgetDetails()));
-		dto.setChargeDtos(chargeService.convertToDtoList(domain.getCharges()));
-		return dto;
+		dto.setDetails(convertToDetailDtoList(domain.getBudgetDetails()));
+	    dto.setCharges(chargeService.convertToDtoList(domain.getCharges()));
+
+	    return dto;
 	}
 
 	@Override
@@ -90,40 +143,43 @@ public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,Bu
 		domain.setId(dto.getId());
 		domain.setTotalAmount(dto.getTotalAmount());
 		domain.setWork(workDao.findById(dto.getWorkId()).get());
-		domain.setBudgetDetails(convertToDetailDomainList(dto.getDetailDtos()));
-		domain.setCharges(chargeService.convertToDomainList(dto.getChargeDtos()));
+		
 		return domain;
 	}
 
-	private BudgetDetailDomain convertToDetailDomain(BudgetDetailDTO dto) {
+	public BudgetDetailDomain convertToDetailDomain(BudgetDetailDTO dto) {
 		final BudgetDetailDomain domain = new BudgetDetailDomain();
 		domain.setId(dto.getId());
 		domain.setAmount(dto.getAmount());
 		domain.setBudget(budgetDao.findById(dto.getBudgetId()).get());
 		domain.setBudgetConcept(budgetConceptDao.findById(dto.getBudgetConceptId()).get());
 		domain.setQuantity(dto.getQuantity());
+		
 		return domain;
 	}
 
-	private BudgetDetailDTO convertToDetailDto(BudgetDetailDomain domain) {
+	public BudgetDetailDTO convertToDetailDto(BudgetDetailDomain domain) {
 		final BudgetDetailDTO dto = new BudgetDetailDTO();
 		dto.setId(domain.getId());
 		dto.setAmount(domain.getAmount());
 		dto.setQuantity(domain.getQuantity());
 		dto.setBudgetConceptId(domain.getBudgetConcept().getId());
 		dto.setBudgetId(domain.getBudget().getId());
+		
 		return dto;
 	}
 
-	private List<BudgetDetailDomain> convertToDetailDomainList(List<BudgetDetailDTO> list){
+	public List<BudgetDetailDomain> convertToDetailDomainList(List<BudgetDetailDTO> list){
 		final ArrayList<BudgetDetailDomain> domains = new ArrayList<>();
 		list.forEach( dto -> domains.add( convertToDetailDomain(dto) ) );
+		
 		return domains;
 	}
 
-	private List<BudgetDetailDTO> convertToDetailDtoList(List<BudgetDetailDomain> list){
+	public List<BudgetDetailDTO> convertToDetailDtoList(List<BudgetDetailDomain> list){
 		final ArrayList<BudgetDetailDTO> dtos = new ArrayList<>();
 		list.forEach( domain -> dtos.add( convertToDetailDto( domain ) ) );
+		
 		return dtos;
 	}
 }

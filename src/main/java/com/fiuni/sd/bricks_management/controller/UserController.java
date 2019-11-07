@@ -37,6 +37,7 @@ public class UserController {
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "lastName", required = false) String lastName,
 			@RequestParam(value = "document", required = false) String document) {
+		
 		if (name != null) {
 			if (lastName == null) {
 				return userService.getByName(name, PageRequest.of(pageNum, Setting.PAGE_SIZE));

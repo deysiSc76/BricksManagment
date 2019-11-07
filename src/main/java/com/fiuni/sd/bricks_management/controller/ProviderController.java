@@ -46,6 +46,7 @@ public class ProviderController {
 	public ProviderResult searchProviders(@PathVariable(value = "page_num")Integer pageNum,
 									   @RequestParam(value = "bussiness-name", required = false) String bussinessName,
 									   @RequestParam(value = "ruc", required = false) String ruc) {
+		
 		if (bussinessName != null) {
 			if (ruc == null) {
 				return providerService.getByBussinessName(bussinessName, PageRequest.of(pageNum, Setting.PAGE_SIZE));

@@ -39,6 +39,7 @@ public class WorkController {
 	@GetMapping(path = "/page/{page_num}/search")
 	public WorkResult searchWorks(@PathVariable(value = "page_num") Integer pageNum,
 								  @RequestParam(value = "name") String name) {
+	
 		if (name != null) {
 			return workService.getByName(name, PageRequest.of(pageNum, Setting.PAGE_SIZE));
 		}

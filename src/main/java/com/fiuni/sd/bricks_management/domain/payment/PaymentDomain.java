@@ -3,6 +3,7 @@ package com.fiuni.sd.bricks_management.domain.payment;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -62,7 +63,7 @@ public class PaymentDomain implements BaseDomain {
 	@JoinColumn(name = "personal_debt_id")
 	private PersonalDebtDomain personal_debt;
 	
-	@OneToMany(mappedBy = "payment")
+	@OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PaymentDetailDomain> payment_details = new ArrayList<>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
