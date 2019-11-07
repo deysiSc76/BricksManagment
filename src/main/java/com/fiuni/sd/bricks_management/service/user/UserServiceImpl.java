@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.user;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fiuni.sd.bricks_management.dao.role.IRoleDAO;
 import com.fiuni.sd.bricks_management.dao.users.IUserDAO;
+import com.fiuni.sd.bricks_management.dao.work.IWorkDAO;
 import com.fiuni.sd.bricks_management.domain.role.RoleDomain;
 import com.fiuni.sd.bricks_management.domain.user.UserDomain;
+import com.fiuni.sd.bricks_management.domain.work.WorkDomain;
 import com.fiuni.sd.bricks_management.dto.rol.RolDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserDTO;
 import com.fiuni.sd.bricks_management.dto.user.UserResult;
@@ -25,7 +26,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 	@Autowired
 	private IUserDAO userDao;
 	@Autowired
-	private IRoleDAO roleDao;
+	private IWorkDAO workDao;
 	
 	@Override
 	@Transactional
@@ -111,6 +112,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		dto.setPassword(domain.getPassword());
 		dto.setRoles(convertToRolDtoList(domain.getRoles()));
 		
+		List<Integer> workIds = new ArrayList<>();
+		List<WorkDomain> works = domain.getUserWorks();
+		works.forEach(work -> workIds.add(work.getId()));
+		dto.setWorksId(workIds);
+		
 		return dto;
 	}
 
@@ -127,6 +133,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDomain, UserRe
 		domain.setNumber(dto.getNumber());
 		domain.setPassword(dto.getPassword());
 		domain.setRoles(convertToRolDomainList(dto.getRoles()));
+		
+		List<WorkDomain> works = new ArrayList<>();
+		List<Integer> workIds = dto.getWorksId();
+		workIds.forEach(id -> works.add(workDao.findById(id).get()));
+		domain.setUserWorks(works);
 		
 		return domain;
 	}

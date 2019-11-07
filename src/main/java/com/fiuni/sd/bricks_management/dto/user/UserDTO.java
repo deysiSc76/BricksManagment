@@ -22,7 +22,7 @@ public class UserDTO extends BaseDTO {
 	private String email;
 	private String password;
 	private List<RolDTO> roles;
-
+	private List<Integer> worksId;
 	
 	@XmlElement
 	public String getEmail() {
@@ -86,5 +86,11 @@ public class UserDTO extends BaseDTO {
 	}
 	public void setRoles(List<RolDTO> roles) {
 		this.roles = roles;
+	}
+	public List<Integer> getWorksId() {
+		return worksId;
+	}
+	public void setWorksId(List<Integer> worksId) {
+		this.worksId = worksId;
 	}
 }
