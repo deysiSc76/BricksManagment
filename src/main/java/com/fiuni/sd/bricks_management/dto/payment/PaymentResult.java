@@ -15,9 +15,8 @@ public class PaymentResult extends BaseResult<PaymentDTO> {
 	public List<PaymentDTO> getPayments() {
 		return getList();
 	}
-	
+
 	public void setPayments(List<PaymentDTO> dtos) {
 		super.setList(dtos);
 	}
-	
 }

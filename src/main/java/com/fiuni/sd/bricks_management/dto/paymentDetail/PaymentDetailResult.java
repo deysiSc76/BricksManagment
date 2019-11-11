@@ -1,4 +1,5 @@
 package com.fiuni.sd.bricks_management.dto.paymentDetail;
+
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -11,11 +12,11 @@ public class PaymentDetailResult extends BaseResult<PaymentDetailDTO>{
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<PaymentDetailDTO> getList() {
+	public List<PaymentDetailDTO> getPaymentDetails() {
 		return getList();
 	}
-	
-	public void setList(List<PaymentDetailDTO> dtos) {
+
+	public void setPaymentDetails(List<PaymentDetailDTO> dtos) {
 		super.setList(dtos);
 	}
 }

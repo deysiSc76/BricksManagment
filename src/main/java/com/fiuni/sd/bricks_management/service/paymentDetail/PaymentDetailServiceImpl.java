@@ -1,6 +1,6 @@
 package com.fiuni.sd.bricks_management.service.paymentDetail;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fiuni.sd.bricks_management.dao.payment.IPaymentDAO;
-import com.fiuni.sd.bricks_management.dao.paymentConcept.IPaymentConceptDao;
 import com.fiuni.sd.bricks_management.dao.paymentDetail.IPaymentDetailDao;
+import com.fiuni.sd.bricks_management.dao.paymentConcept.IPaymentConceptDao;
 import com.fiuni.sd.bricks_management.domain.paymentDetail.PaymentDetailDomain;
 import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailResult;
@@ -89,7 +89,7 @@ implements IPaymentDetailService {
 		dto.setUnitPrice(domain.getUnit_price());
 		dto.setQuantity(domain.getQuantity());
 		dto.setPaymentRelatedId(domain.getPayment_related().getId());
-		dto.setPaymentConceptId(domain.getPayment_concept().getId());
+		dto.setPaymentConcept(domain.getPayment_concept().getId());
 		dto.setPaymentId(domain.getPayment().getId());
 		return dto;
 	}

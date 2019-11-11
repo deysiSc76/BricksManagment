@@ -1,29 +1,24 @@
 package com.fiuni.sd.bricks_management.dto.payment;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
-import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 
 @XmlRootElement(name = "payment")
 public class PaymentDTO extends BaseDTO{
 	
 	private static final long serialVersionUID = 1L;
 	
+	private int workId;
+	private int debtId;
+	private int providerId;
 	private int total;
 	private String date;
 	private String documentType;
 	private int number;
 	private int stamping;
 	private int billType;
-	private Integer workId;
-	private Integer personalDebtId;
-	private Integer providerId;
-	//private Integer paymentDetailId;
-	private List<PaymentDetailDTO> details;
 	
 	@XmlElement
 	public int getWorkId() {
@@ -33,11 +28,11 @@ public class PaymentDTO extends BaseDTO{
 		this.workId = workId;
 	}
 	@XmlElement
-	public int getPersonalDebtId() {
-		return personalDebtId;
+	public int getDebtId() {
+		return debtId;
 	}
-	public void setPersonalDebtId(int personalDebtId) {
-		this.personalDebtId = personalDebtId;
+	public void setDebtId(int debtId) {
+		this.debtId = debtId;
 	}
 	@XmlElement
 	public int getProviderId() {
@@ -88,18 +83,10 @@ public class PaymentDTO extends BaseDTO{
 	public void setBillType(int billType) {
 		this.billType = billType;
 	}
-	/*@XmlElement
-	public Integer getPaymentDetailId() {
-		return paymentDetailId;
-	}
-	public void setPaymentDetailId(Integer paymentDetailId) {
-		this.paymentDetailId = paymentDetailId;
-	}*/
-	public List<PaymentDetailDTO> getDetails() {
-		return details;
-	}
-	public void setDetails(List<PaymentDetailDTO> details) {
-		this.details = details;
-	}
-	
+	@Override
+	public String toString() {
+		return "PaymentDTO [workId=" + workId + ", debID=" + debtId + ", providerId=" + providerId
+				+ ", total=" + total + ", date="+ date +", documentType="+ documentType +", number="+ number+ ", stamping"+ stamping+
+				", billType"+ billType+ "]";
+	}	
 }

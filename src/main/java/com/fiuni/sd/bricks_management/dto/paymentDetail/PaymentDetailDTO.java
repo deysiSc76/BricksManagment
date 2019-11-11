@@ -1,6 +1,5 @@
 package com.fiuni.sd.bricks_management.dto.paymentDetail;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.bricks_management.dto.base.BaseDTO;
@@ -11,40 +10,34 @@ public class PaymentDetailDTO extends BaseDTO {
 	
 	private int unitPrice;
 	private int quantity;
+	private int payment_id;
+	private int paymentConceptId;
+	private int paymentRealatedId;
 	
-	private Integer payment_id;
-	private Integer paymentConceptId;
-	private Integer paymentRealatedId;
-	
-	@XmlElement
-	public Integer getPaymentRelatedId() {
+	public int getPaymentRelatedId() {
 		return paymentRealatedId;
 	}
 	public void setPaymentRelatedId(int paymentRelatedId) {
 		this.paymentRealatedId = paymentRelatedId;
 	}
-	@XmlElement
-	public Integer getPaymentId() {
+	public int getPaymentId() {
 		return payment_id;
 	}
 	public void setPaymentId(int headerId) {
 		this.payment_id = headerId;
 	}
-	@XmlElement
-	public Integer getPaymentConceptId() {
+	public int getPaymentConceptId() {
 		return paymentConceptId;
 	}
-	public void setPaymentConceptId(int paymentConceptId) {
+	public void setPaymentConcept(int paymentConceptId) {
 		this.paymentConceptId = paymentConceptId;
 	}
-	@XmlElement
 	public int getUnitPrice() {
 		return unitPrice;
 	}
 	public void setUnitPrice(int unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	@XmlElement
 	public int getQuantity() {
 		return quantity;
 	}
