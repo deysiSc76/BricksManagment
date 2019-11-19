@@ -41,7 +41,7 @@ public class PaymentController {
 	public FullPaymentDTO update(@PathVariable(value = "id") Integer id, @Valid @RequestBody FullPaymentDTO dto) {
 		for(PaymentDetailDTO detail : paymentDetailService.getByPaymentId(id).getList()){
 			if(!dto.getDetails().contains(detail)) {
-				paymentDetailService.delete(detail);
+				paymentDetailService.delete(detail.getId());
 			}
 		}
 		return paymentService.save(dto);

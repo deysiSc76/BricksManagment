@@ -10,5 +10,6 @@ import com.fiuni.sd.bricks_management.service.base.IBaseService;
 public interface IBudgetConceptService extends IBaseService<BudgetConceptDTO, BudgetConceptResult> {
 	
 	public BudgetConceptDTO update(Integer id, BudgetConceptDTO dto);
+	public void delete(Integer id);
 	
 }

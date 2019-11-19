@@ -65,6 +65,12 @@ public class BudgetConceptServiceImpl extends BaseServiceImpl<BudgetConceptDTO,
 		
 		return dto;
 	}
+	@Override
+	public void delete(Integer id) {
+		budgetConceptDao.deleteById(id);
+		
+	}
+
 
 	@Override
 	protected BudgetConceptDomain convertDtoToDomain(BudgetConceptDTO dto) {

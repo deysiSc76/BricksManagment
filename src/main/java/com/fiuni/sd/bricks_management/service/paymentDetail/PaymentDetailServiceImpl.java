@@ -78,8 +78,8 @@ implements IPaymentDetailService {
 
 
 	@Override
-	public void delete(PaymentDetailDTO detail) {
-		paymentDetailDao.deleteById(detail.getId());	
+	public void delete(int id) {
+		paymentDetailDao.deleteById(id);	
 	}
 	
 	@Override

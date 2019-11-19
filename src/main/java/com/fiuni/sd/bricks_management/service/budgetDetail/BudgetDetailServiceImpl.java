@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fiuni.sd.bricks_management.dao.budget.IBudgetDAO;
 import com.fiuni.sd.bricks_management.dao.budgetConcept.IBudgetConceptDAO;
 import com.fiuni.sd.bricks_management.dao.budgetDetail.IBudgetDetailDAO;
 import com.fiuni.sd.bricks_management.domain.budgetDetail.BudgetDetailDomain;
+import com.fiuni.sd.bricks_management.domain.paymentDetail.PaymentDetailDomain;
 import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailDTO;
 import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailResult;
+import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
+import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailResult;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
 
 @Service
@@ -27,11 +31,7 @@ public class BudgetDetailServiceImpl extends BaseServiceImpl<BudgetDetailDTO, Bu
 	@Autowired
 	private IBudgetConceptDAO budgetConceptDao;
 	
-	@Override
-	public BudgetDetailDTO save(BudgetDetailDTO dto) {
-		final BudgetDetailDomain domain = convertDtoToDomain(dto);
-		return convertDomainToDto(budgetDetailDao.save(domain));
-	}
+	
 
 	@Override
 	public BudgetDetailDTO getById(Integer id) {
@@ -78,12 +78,12 @@ public class BudgetDetailServiceImpl extends BaseServiceImpl<BudgetDetailDTO, Bu
 	
 	@Override
 	protected BudgetDetailDomain convertDtoToDomain(BudgetDetailDTO dto) {
-		/*final BudgetDetailDomain domain = new BudgetDetailDomain();
+		final BudgetDetailDomain domain = new BudgetDetailDomain();
 		domain.setId(dto.getId());
 		domain.setAmount(dto.getAmount());
 		domain.setBudget(budgetDao.findById(dto.getBudgetId()).get());
 		domain.setBudgetConcept(budgetConceptDao.findById(dto.getBudgetConceptId()).get());
-		domain.setQuantity(dto.getQuantity());*/
+		domain.setQuantity(dto.getQuantity());
 		return null;
 	}
 
@@ -98,11 +98,38 @@ public class BudgetDetailServiceImpl extends BaseServiceImpl<BudgetDetailDTO, Bu
 		list.forEach( domain -> dtos.add( convertDomainToDto( domain ) ) );
 		return dtos;
 	}
-
+	
+	@Override
+	@Transactional
+	public BudgetDetailResult saveList(List<BudgetDetailDTO> budgetDetails) {
+		for(BudgetDetailDTO dto : budgetDetails) {
+			BudgetDetailDTO saved = save(dto);
+			dto.setId(saved.getId());
+		}
+		BudgetDetailResult budgetDetailResult = new BudgetDetailResult();
+		budgetDetailResult.setList(budgetDetails);
+		return budgetDetailResult;
+	}
+	@Override
+	public BudgetDetailResult getByBudgetId(Integer budgetId) {
+		final List<BudgetDetailDTO> budgetDetails = new ArrayList<>();
+		List<BudgetDetailDomain> results = budgetDetailDao.findByBudgetId(budgetId);
+		results.forEach(budgetDetail -> budgetDetails.add(convertDomainToDto(budgetDetail)));
+		
+		final BudgetDetailResult budgetDetailResult = new BudgetDetailResult();
+		budgetDetailResult.setList(budgetDetails);
+		return budgetDetailResult;
+	}
 	@Override
 	public void delete(Integer id) {
-		// TODO Auto-generated method stub
+		budgetDao.deleteById(id);
 		
+	}
+
+	@Override
+	public BudgetDetailDTO save(BudgetDetailDTO dto) {
+		BudgetDetailDomain newDet =  budgetDetailDao.save(convertDtoToDomain(dto));
+		return convertDomainToDto(newDet);
 	}
 	
 }

@@ -60,6 +60,13 @@ implements IPaymentService {
 		paymentResult.setList(payments);
 		return paymentResult;
 	}
+	
+	@Override
+	public FullPaymentDTO getFullPayment(Integer id) {
+		final PaymentDomain domain = paymentDao.findById(id).get();
+		return convertDomainToFullDto(domain);
+	}
+	
 	public void delete(Integer id) {
 		paymentDao.deleteById(id);
 		

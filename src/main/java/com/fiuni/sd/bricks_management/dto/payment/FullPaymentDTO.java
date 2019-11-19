@@ -30,5 +30,4 @@ public class FullPaymentDTO implements Serializable {
 		return details != null ? details.size() : 0;
 	}
 	
-	
 }

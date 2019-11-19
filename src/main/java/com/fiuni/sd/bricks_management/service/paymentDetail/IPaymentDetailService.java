@@ -10,5 +10,5 @@ public interface IPaymentDetailService  extends IBaseService<PaymentDetailDTO,  
 
 	public PaymentDetailResult getByPaymentId(Integer paymentId);
 	public PaymentDetailResult save(List<PaymentDetailDTO> paymentDetails);
-	public void delete(PaymentDetailDTO detail);
+	public void delete(int id);
 }

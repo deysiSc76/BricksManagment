@@ -15,11 +15,18 @@ import com.fiuni.sd.bricks_management.dao.budgetDetail.IBudgetDetailDAO;
 import com.fiuni.sd.bricks_management.dao.work.IWorkDAO;
 import com.fiuni.sd.bricks_management.domain.budget.BudgetDomain;
 import com.fiuni.sd.bricks_management.domain.budgetDetail.BudgetDetailDomain;
+import com.fiuni.sd.bricks_management.domain.payment.PaymentDomain;
 import com.fiuni.sd.bricks_management.dto.budget.BudgetDTO;
 import com.fiuni.sd.bricks_management.dto.budget.BudgetResult;
+import com.fiuni.sd.bricks_management.dto.budget.FullBudgetDTO;
 import com.fiuni.sd.bricks_management.dto.budgetDetail.BudgetDetailDTO;
+import com.fiuni.sd.bricks_management.dto.payment.FullPaymentDTO;
+import com.fiuni.sd.bricks_management.dto.payment.PaymentDTO;
+import com.fiuni.sd.bricks_management.dto.paymentDetail.PaymentDetailDTO;
 import com.fiuni.sd.bricks_management.service.base.BaseServiceImpl;
+import com.fiuni.sd.bricks_management.service.budgetDetail.IBudgetDetailService;
 import com.fiuni.sd.bricks_management.service.charge.ChargeServiceImpl;
+import com.fiuni.sd.bricks_management.service.paymentDetail.IPaymentDetailService;
 
 @Service
 public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,BudgetResult>
@@ -30,25 +37,55 @@ public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,Bu
 	@Autowired
 	private IBudgetDetailDAO budgetDetailDao;
 	@Autowired
+	private IBudgetDetailService budgetDetailService;
+	@Autowired
 	private IWorkDAO workDao;
 	@Autowired
 	private IBudgetConceptDAO budgetConceptDao;
 	@Autowired
 	private ChargeServiceImpl chargeService;
-
+	
 	@Override
 	@Transactional
 	public BudgetDTO save(BudgetDTO dto) {
-		List<BudgetDetailDTO> detailsDto = dto.getDetails();
-		final BudgetDomain budget = convertDtoToDomain(dto);
-		budgetDao.save(budget);
+		final BudgetDomain domain = convertDtoToDomain(dto);
+		final BudgetDomain paymentDomain = budgetDao.save(domain);
+		return convertDomainToDto(paymentDomain);
+	}
+	
+	
+
+	@Override
+	@Transactional
+	public FullBudgetDTO save(FullBudgetDTO fullBudget) {
+		fullBudget.setBudget(save(fullBudget.getBudget()));
+		fullBudget.getDetais().forEach(
+				(BudgetDetailDTO det)->
+					det.setBudgetId(fullBudget.getBudget().getId())
+		);
+		fullBudget.setDetails(
+				budgetDetailService.saveList(fullBudget.getDetais()).getList())
+		;
+		return fullBudget;
+	}
+	@Override
+	public FullBudgetDTO getFullBudget(Integer id) {
+		final BudgetDomain domain = budgetDao.findById(id).get();
+		return convertDomainToFullDto(domain);
+	}
+	protected FullBudgetDTO convertDomainToFullDto(BudgetDomain domain) {
+		final BudgetDTO budgetDto = new BudgetDTO();
+		budgetDto.setId(domain.getId());
+		budgetDto.setWorkId(domain.getWork().getId());
+		budgetDto.setTotalAmount(domain.getTotalAmount());
+
+		FullBudgetDTO dto = new FullBudgetDTO();
+		dto.setBudget(budgetDto);		
+		dto.setDetails(
+			budgetDetailService.getByBudgetId(domain.getId()).getList()
+		);		
 		
-		detailsDto.forEach(detail -> detail.setBudgetId(budget.getId()));
-		List<BudgetDetailDomain> detailsDomain = convertToDetailDomainList(detailsDto);
-		detailsDomain.forEach(detail -> budgetDetailDao.save(detail));
-		budget.setBudgetDetails(detailsDomain);
-		
-		return convertDomainToDto(budget);
+		return dto;
 	}
 	
 	/*
@@ -182,4 +219,7 @@ public class BudgetServiceImpl extends BaseServiceImpl<BudgetDTO,BudgetDomain,Bu
 		
 		return dtos;
 	}
+
+
+	
 }
