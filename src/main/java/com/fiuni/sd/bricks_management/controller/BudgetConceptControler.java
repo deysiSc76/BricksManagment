@@ -34,7 +34,7 @@ public class BudgetConceptControler {
 	}
 	@PutMapping("/{id}")
 	public BudgetConceptDTO update(@RequestBody BudgetConceptDTO budgetConceptDto ,@PathVariable(value= "id") Integer id) {
-		return budgetConceptService.update(budgetConceptDto, id);
+		return budgetConceptService.update(id, budgetConceptDto);
 	}
 
 }

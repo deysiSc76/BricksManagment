@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,10 @@ public class ChargeController {
 	@GetMapping("/{id}")
 	public ChargeDTO getById(@PathVariable(value = "id") Integer id) {
 		return chargeService.getById(id);
+	}
+	
+	public ChargeResult getByDate(@PathVariable(value = "id") String date, Pageable pageable) {
+		return chargeService.getByDate(date, pageable);
 	}
 	
 	@PutMapping("/{id}")
