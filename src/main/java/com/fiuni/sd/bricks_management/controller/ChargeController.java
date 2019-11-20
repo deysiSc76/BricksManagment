@@ -34,9 +34,9 @@ public class ChargeController {
 	public ChargeDTO getById(@PathVariable(value = "id") Integer id) {
 		return chargeService.getById(id);
 	}
-	
-	public ChargeResult getByDate(@PathVariable(value = "id") String date, Pageable pageable) {
-		return chargeService.getByDate(date, pageable);
+	@GetMapping("/by-date/{date}/{page_num}")
+	public ChargeResult getByDate(@PathVariable(value = "date") String date, @PathVariable(value = "page_num") Integer pageNum) {
+		return chargeService.getByDate(date, PageRequest.of(pageNum, Setting.PAGE_SIZE));
 	}
 	
 	@PutMapping("/{id}")
